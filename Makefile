@@ -5,7 +5,7 @@ install:
 # development
 
 dev: install-dev
-	poetry run python task_manager/manage.py runserver
+	poetry run python manage.py runserver
 
 install-dev:
 	poetry install --with dev
