@@ -14,17 +14,19 @@ import os
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# env variables
+try:
+    from dotenv import load_dotenv
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+    load_dotenv()
+except:
+    print("Module dotenv not found.") # TODO: logger
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", default="owp3#7kme55ro!z!kndr@*mbh@")
+SECRET_KEY = os.getenv("SECRET_KEY")
+assert SECRET_KEY, "You should set your secret key! Use dotenv or set manually."
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = [
