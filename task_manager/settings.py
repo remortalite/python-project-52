@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import logging
 import os
 
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+logger = logging.getLogger(__name__)
+logging.config(level=logging.INFO)
 
 # env variables
 try:
@@ -22,12 +26,15 @@ try:
 
     load_dotenv()
 except:
-    print("Module dotenv not found.") # TODO: logger
+    logger.info("Module dotenv not found.") # TODO: logger
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 assert SECRET_KEY, "You should set your secret key! Use dotenv or set manually."
 
+# Set DEBUG for all except Render (production version)
 DEBUG = 'RENDER' not in os.environ
+if DEBUG:
+    logger.info("You started in debug mode")
 
 ALLOWED_HOSTS = [
     'webserver',
