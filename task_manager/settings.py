@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import logging
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
@@ -20,12 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 logger = logging.getLogger(__name__)
 
 # env variables
-try:
-    from dotenv import load_dotenv
-
-    load_dotenv()
-except:
-    logger.info("Module dotenv not found.")
+load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 assert SECRET_KEY, "You should set your secret key! Use dotenv or set manually."
