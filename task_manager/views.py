@@ -3,6 +3,7 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import User
 
 class IndexView(views.View):
     def get(self, request, *args, **kwargs):
@@ -30,3 +31,9 @@ class LogoutView(views.View):
         logout(request)
         messages.info(request, _("Вы разлогинены"))
         return redirect(reverse("index"))
+
+
+class UsersView(views.View):
+    def get(self, request, *args, **kwargs):
+        users = User.objects.all()
+        return render(request, "users.html", context={"users": users})
