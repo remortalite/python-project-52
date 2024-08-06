@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-03 23:55+0700\n"
+"POT-Creation-Date: 2024-08-06 21:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: task_manager/templates/base.html:17
-msgid "Менеджер задач"
-msgstr "Task manager"
 
-#: task_manager/templates/base.html:20
-msgid "Пользователи"
-msgstr "Users"
+#: task_manager/settings.py:127
+msgid "Russian"
+msgstr ""
 
-#: task_manager/templates/base.html:23
-msgid "Вход"
-msgstr "Log in"
-
-#: task_manager/templates/base.html:26
-msgid "Регистрация"
-msgstr "Sign up"
+#: task_manager/settings.py:128
+msgid "English"
+msgstr ""
 
 #: task_manager/templates/index.html:7
 msgid "Привет от Хекслета!"
@@ -44,3 +37,67 @@ msgstr "Practical programming courses"
 #: task_manager/templates/index.html:13
 msgid "Узнать больше"
 msgstr "Learn more"
+
+#: task_manager/templates/layout/base.html:18
+msgid "Менеджер задач"
+msgstr "Task manager"
+
+#: task_manager/templates/layout/base.html:21
+#: task_manager/templates/users.html:7
+msgid "Пользователи"
+msgstr "Users"
+
+#: task_manager/templates/layout/base.html:28
+msgid "Выход"
+msgstr "Log out"
+
+#: task_manager/templates/layout/base.html:34
+msgid "Вход"
+msgstr "Log in"
+
+#: task_manager/templates/layout/base.html:37
+msgid "Регистрация"
+msgstr "Sign up"
+
+#: task_manager/templates/registration/login.html:12
+msgid "Имя пользователя"
+msgstr "Username"
+
+#: task_manager/templates/registration/login.html:17
+msgid "Пароль"
+msgstr "Password"
+
+#: task_manager/templates/registration/login.html:22
+msgid "Войти"
+msgstr "Log in"
+
+#: task_manager/templates/users.html:12
+msgid "Полное имя"
+msgstr "Full name"
+
+#: task_manager/templates/users.html:13
+msgid "Дата создания"
+msgstr "Created at"
+
+#: task_manager/templates/users.html:24
+msgid "Редактировать"
+msgstr "Edit"
+
+#: task_manager/templates/users.html:26
+msgid "Удалить"
+msgstr "Delete"
+
+#: task_manager/views.py:24
+msgid "Вы залогинены"
+msgstr "Logged in"
+
+#: task_manager/views.py:27
+msgid ""
+"Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
+"быть чувствительны к регистру."
+msgstr ""
+"Please enter correct username and password! Both fields are case sensitive"
+
+#: task_manager/views.py:35
+msgid "Вы разлогинены"
+msgstr "Logged out"
