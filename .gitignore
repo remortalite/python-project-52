@@ -7,3 +7,4 @@ static/
 .env
 .coverage
 coverage.*
+db.sqlite3
