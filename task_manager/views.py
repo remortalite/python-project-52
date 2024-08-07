@@ -58,14 +58,22 @@ class UserFormView(views.View):
         return render(request, "registration/signup.html", {"form": form})
 
 
-class UserUpdateView(views.View):
+from django.contrib.auth.mixins import LoginRequiredMixin
+class UserUpdateView(LoginRequiredMixin, views.View):
+    login_url = '/login/'
     def get(self, request, id, *args, **kwargs):
+        if request.user.id != id:
+            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect(reverse('users'))
         user = User.objects.get(id=id)
         form = UserUpdateForm(instance=user)
         if user:
             return render(request, "registration/update.html", {"form": form, "user_id": id})
 
     def post(self, request, id, *args, **kwargs):
+        if request.user.id != id:
+            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect(reverse('users'))
         user = User.objects.get(id=id)
         form = UserUpdateForm(data=request.POST, instance=user)
         if form.is_valid():
@@ -73,3 +81,22 @@ class UserUpdateView(views.View):
             messages.info(request, _("Пользователь успешно изменен"))
             return redirect(reverse('index'))
         return render(request, "registration/update.html", {"form": form, "user_id": id})
+
+class UserDeleteView(LoginRequiredMixin, views.View):
+    login_url = "/login/"
+    def get(self, request, id, *args, **kwargs):
+        if request.user.id != id:
+            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect(reverse('users'))
+        user = User.objects.get(id=id)
+        return render(request, "registration/delete.html", {"user": user})
+
+    def post(self, request, id, *args, **kwargs):
+        if request.user.id != id:
+            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect(reverse('users'))
+        user = User.objects.get(id=id)
+        if user:
+            user.delete()
+            messages.info(request, _("Пользователь успешно удален"))
+        return redirect(reverse("users"))
