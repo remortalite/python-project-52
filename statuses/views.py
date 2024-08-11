@@ -31,7 +31,6 @@ class StatusCreateView(LoginRequiredMixin, View):
             form.save()
             messages.info(request, _("Статус успешно создан"))
             return redirect(reverse("statuses"))
-        messages.error(request, _("Неправильное имя статуса"))
         return render(request, "statuses/create.html",
                       {"form": form})
 
@@ -51,7 +50,6 @@ class StatusUpdateView(LoginRequiredMixin, View):
             form.save()
             messages.info(request, _("Статус успешно изменен"))
             return redirect(reverse("statuses"))
-        messages.error(request, _("Имя статуса указано неверно"))
         return render(request, "statuses/update.html",
                       {"form": form, "status_id": id})
 
