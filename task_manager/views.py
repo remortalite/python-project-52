@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from task_manager.forms import UserCreateForm, UserUpdateForm
 
@@ -25,10 +26,13 @@ class LoginView(views.View):
             login(request, user)
             messages.info(request, _("Вы залогинены"))
             return render(request, "index.html")
-        else:
-            messages.error(request, _("Пожалуйста, введите правильные имя пользователя и пароль. "
-                                      "Оба поля могут быть чувствительны к регистру."))
-            return render(request, "registration/login.html", context={"username": username})
+
+        messages.error(request, _("Пожалуйста, введите правильные имя пользователя и пароль. "
+                                  "Оба поля могут быть чувствительны к регистру."))
+        return render(request,
+                      "registration/login.html",
+                      context={"username": username},
+                      status=403)
 
 
 class LogoutView(views.View):
@@ -58,7 +62,6 @@ class UserFormView(views.View):
         return render(request, "registration/signup.html", {"form": form})
 
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 class UserUpdateView(LoginRequiredMixin, views.View):
     login_url = '/login/'
     def get(self, request, id, *args, **kwargs):

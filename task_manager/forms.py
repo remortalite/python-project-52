@@ -38,4 +38,3 @@ class UserUpdateForm(forms.ModelForm):
             self.add_error('confirm_password', _("Пароли не совпадают"))
 
         return cleaned_data
-
