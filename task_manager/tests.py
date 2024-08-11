@@ -1,4 +1,6 @@
 import unittest
+
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
@@ -13,7 +15,7 @@ class UsersViewTest(unittest.TestCase):
     # Test: task_manager.views.UsersView
 
     def setUp(self):
-        User.objects.create(first_name="test_username", username="test_user", password="test_password")
+        User.objects.create_user(first_name="test_username", username="test_user", password="test_password")
 
     def tearDown(self):
         User.objects.get(username="test_user").delete()
@@ -28,7 +30,7 @@ class UsersViewTest(unittest.TestCase):
 class TestUserFormView(unittest.TestCase):
 
     def setUp(self):
-        User.objects.create(first_name="test_first_name", username="test_user", password="test_password")
+        user = User.objects.create_user(first_name="test_first_name", username="test_user", password="test_password")
 
     def tearDown(self):
         User.objects.get(username="test_user").delete()
@@ -46,7 +48,7 @@ class TestUserFormView(unittest.TestCase):
 
         User.objects.get(username="test_user_post").delete()
 
-    def test_update_redirect_unauthorized(self):
+    def test_update_unauthorized(self):
         client = Client()
 
         user = User.objects.get(username="test_user")
@@ -57,22 +59,30 @@ class TestUserFormView(unittest.TestCase):
 
     def test_update_authorized(self):
         client = Client()
-        client.post(reverse("login"),
-                    data={
-                        "loginUsername": "test_user",
-                        "loginPassword": "test_password",
-                    })
+
+        logged_in = client.login(username="test_user", password="test_password")
         user = User.objects.get(username="test_user")
         response = client.get(reverse("users_update", kwargs={"id": user.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"test_user", response.content)
-        self.assertIn(b"test_username", response.content)
+        self.assertIn(b"test_first_name", response.content)
 
         client.post(reverse("logout"))
 
         response = client.get(reverse("users_update", kwargs={"id": user.id}))
         self.assertEqual(response.status_code, 302)
+
+    def test_delete(self):
+        client = Client()
+
+        User.objects.create_user(username="test_user_delete", password="test_delete")
+        logged_in = client.login(username="test_user_delete", password="test_delete")
+        user = User.objects.get(username="test_user_delete")
+
+        client.post(reverse("users_delete", kwargs={"id": user.id}))
+
+        self.assertFalse(User.objects.filter(username="test_user_delete").exists())
 
 
 if __name__ == '__main__':
