@@ -54,3 +54,17 @@ class StatusUpdateView(LoginRequiredMixin, View):
         messages.error(request, _("Имя статуса указано неверно"))
         return render(request, "statuses/update.html",
                       {"form": form, "status_id": id})
+
+
+class StatusDeleteView(LoginRequiredMixin, View):
+    def get(self, request, id, *args, **kwargs):
+        status = Status.objects.get(id=id)
+        return render(request, "statuses/delete.html",
+                      context={"status_id": id, "status": status})
+
+    def post(self, request, id, *args, **kwargs):
+        status = Status.objects.get(id=id)
+        if status:
+            status.delete()
+        messages.info(request, _("Статус успешно удален"))
+        return redirect(reverse("statuses"))
