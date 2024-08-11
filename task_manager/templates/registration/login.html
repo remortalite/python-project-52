@@ -6,6 +6,16 @@
 
 <h1 class="h1">Вход</h1>
 
+{% if request.user.is_authenticated %}
+
+<p class="py-3">{% translate "Привет" %}, {{ request.user.username }}!</p>
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="{% translate 'Выйти' %}">
+</form>
+
+{% else %}
 <form class="form col-6 pt-2" method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <div class="form-outline py-2">
@@ -26,5 +36,7 @@
         <input type="submit" class="btn btn-primary w-100" value="{% translate 'Войти' %}">
     </div>
 </form>
+
+{% endif %}
 
 {% endblock %}
