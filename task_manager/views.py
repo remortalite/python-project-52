@@ -27,8 +27,9 @@ class LoginView(views.View):
             messages.info(request, _("Вы залогинены"))
             return render(request, "index.html")
 
-        messages.error(request, _("Пожалуйста, введите правильные имя пользователя и пароль. "
-                                  "Оба поля могут быть чувствительны к регистру."))
+        messages.error(request, _("Пожалуйста, введите правильные "
+                                  "имя пользователя и пароль. Оба поля "
+                                  "могут быть чувствительны к регистру."))
         return render(request,
                       "registration/login.html",
                       context={"username": username},
@@ -45,13 +46,15 @@ class LogoutView(views.View):
 class UsersView(views.View):
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
-        return render(request, "users.html", context={"users": users})
+        return render(request, "users.html",
+                      context={"users": users})
 
 
 class UserFormView(views.View):
     def get(self, request, *args, **kwargs):
         form = UserCreateForm()
-        return render(request, "registration/signup.html", {"form": form})
+        return render(request, "registration/signup.html",
+                      {"form": form})
 
     def post(self, request, *args, **kwargs):
         form = UserCreateForm(request.POST)
@@ -59,23 +62,28 @@ class UserFormView(views.View):
             form.save()
             messages.info(request, _("Пользователь успешно зарегистрирован"))
             return redirect(reverse('login'))
-        return render(request, "registration/signup.html", {"form": form})
+        return render(request, "registration/signup.html",
+                      {"form": form})
 
 
 class UserUpdateView(LoginRequiredMixin, views.View):
     login_url = '/login/'
+
     def get(self, request, id, *args, **kwargs):
         if request.user.id != id:
-            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            messages.error(request, _("У вас нет прав для изменения "
+                                      "другого пользователя."))
             return redirect(reverse('users'))
         user = User.objects.get(id=id)
         form = UserUpdateForm(instance=user)
         if user:
-            return render(request, "registration/update.html", {"form": form, "user_id": id})
+            return render(request, "registration/update.html",
+                          {"form": form, "user_id": id})
 
     def post(self, request, id, *args, **kwargs):
         if request.user.id != id:
-            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            messages.error(request, _("У вас нет прав для изменения "
+                                      "другого пользователя."))
             return redirect(reverse('users'))
         user = User.objects.get(id=id)
         form = UserUpdateForm(data=request.POST, instance=user)
@@ -83,20 +91,26 @@ class UserUpdateView(LoginRequiredMixin, views.View):
             form.save()
             messages.info(request, _("Пользователь успешно изменен"))
             return redirect(reverse('index'))
-        return render(request, "registration/update.html", {"form": form, "user_id": id})
+        return render(request, "registration/update.html",
+                      {"form": form, "user_id": id})
+
 
 class UserDeleteView(LoginRequiredMixin, views.View):
     login_url = "/login/"
+
     def get(self, request, id, *args, **kwargs):
         if request.user.id != id:
-            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            messages.error(request, _("У вас нет прав для изменения "
+                                      "другого пользователя."))
             return redirect(reverse('users'))
         user = User.objects.get(id=id)
-        return render(request, "registration/delete.html", {"user": user})
+        return render(request, "registration/delete.html",
+                      {"user": user})
 
     def post(self, request, id, *args, **kwargs):
         if request.user.id != id:
-            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            messages.error(request, _("У вас нет прав для изменения "
+                                      "другого пользователя."))
             return redirect(reverse('users'))
         user = User.objects.get(id=id)
         if user:

@@ -1,12 +1,9 @@
 import unittest
 
-from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
 import logging
-
-from task_manager.views import UserFormView
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +12,9 @@ class UsersViewTest(unittest.TestCase):
     # Test: task_manager.views.UsersView
 
     def setUp(self):
-        User.objects.create_user(first_name="test_username", username="test_user", password="test_password")
+        User.objects.create_user(first_name="test_username",
+                                 username="test_user",
+                                 password="test_password")
 
     def tearDown(self):
         User.objects.get(username="test_user").delete()
@@ -30,7 +29,9 @@ class UsersViewTest(unittest.TestCase):
 class TestUserFormView(unittest.TestCase):
 
     def setUp(self):
-        user = User.objects.create_user(first_name="test_first_name", username="test_user", password="test_password")
+        User.objects.create_user(first_name="test_first_name",
+                                 username="test_user",
+                                 password="test_password")
 
     def tearDown(self):
         User.objects.get(username="test_user").delete()
@@ -38,11 +39,10 @@ class TestUserFormView(unittest.TestCase):
     def test_post(self):
         client = Client()
         client.post(reverse("users_create"),
-                    data={
-                        "username": "test_user_post",
-                        "password1": "test_user_post",
-                        "password2": "test_user_post",
-                    })
+                    data={"username": "test_user_post",
+                          "password1": "test_user_post",
+                          "password2": "test_user_post"}
+                    )
         user = User.objects.get(username="test_user_post")
         self.assertEqual("test_user_post", user.username)
 
@@ -53,16 +53,19 @@ class TestUserFormView(unittest.TestCase):
 
         user = User.objects.get(username="test_user")
 
-        response = client.get(reverse("users_update", kwargs={"id": user.id}))
+        response = client.get(reverse("users_update",
+                                      kwargs={"id": user.id}))
 
         self.assertEqual(response.status_code, 302)
 
     def test_update_authorized(self):
         client = Client()
 
-        logged_in = client.login(username="test_user", password="test_password")
+        client.login(username="test_user",
+                     password="test_password")
         user = User.objects.get(username="test_user")
-        response = client.get(reverse("users_update", kwargs={"id": user.id}))
+        response = client.get(reverse("users_update",
+                                      kwargs={"id": user.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"test_user", response.content)
@@ -70,19 +73,27 @@ class TestUserFormView(unittest.TestCase):
 
         client.post(reverse("logout"))
 
-        response = client.get(reverse("users_update", kwargs={"id": user.id}))
+        response = client.get(reverse("users_update",
+                                      kwargs={"id": user.id}))
         self.assertEqual(response.status_code, 302)
 
     def test_delete(self):
         client = Client()
 
-        User.objects.create_user(username="test_user_delete", password="test_delete")
-        logged_in = client.login(username="test_user_delete", password="test_delete")
+        User.objects.create_user(username="test_user_delete",
+                                 password="test_delete")
+        client.login(username="test_user_delete",
+                     password="test_delete")
         user = User.objects.get(username="test_user_delete")
 
-        client.post(reverse("users_delete", kwargs={"id": user.id}))
+        client.post(reverse("users_delete",
+                            kwargs={"id": user.id}))
 
-        self.assertFalse(User.objects.filter(username="test_user_delete").exists())
+        self.assertFalse(
+            User
+            .objects
+            .filter(username="test_user_delete").exists()
+        )
 
 
 if __name__ == '__main__':
