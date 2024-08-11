@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from statuses.models import Status
 from statuses.forms import StatusForm
 
 
-class IndexView(View):
+class IndexView(LoginRequiredMixin, View):
+    login_url = "/login/"
 
     def get(self, request, *args, **kwargs):
         statuses = Status.objects.all()
@@ -15,7 +17,8 @@ class IndexView(View):
                       context={"statuses": statuses})
 
 
-class StatusCreateView(View):
+class StatusCreateView(LoginRequiredMixin, View):
+    login_url = "/login/"
 
     def get(self, request, *args, **kwargs):
         form = StatusForm()
@@ -31,3 +34,23 @@ class StatusCreateView(View):
         messages.error(request, _("Неправильное имя статуса"))
         return render(request, "statuses/create.html",
                       {"form": form})
+
+
+class StatusUpdateView(LoginRequiredMixin, View):
+
+    def get(self, request, id, *args, **kwargs):
+        status = Status.objects.get(id=id)
+        form = StatusForm(instance=status)
+        return render(request, "statuses/update.html",
+                      context={"form": form, "status_id": id})
+
+    def post(self, request, id, *args, **kwargs):
+        status = Status.objects.get(id=id)
+        form = StatusForm(request.POST, instance=status)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _("Статус успешно изменен"))
+            return redirect(reverse("statuses"))
+        messages.error(request, _("Имя статуса указано неверно"))
+        return render(request, "statuses/update.html",
+                      {"form": form, "status_id": id})
