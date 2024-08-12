@@ -13,8 +13,9 @@ logger = logging.getLogger(__name__)
 class StatusViewTest(unittest.TestCase):
 
     def setUp(self):
-        User.objects.create_user(username="test_user",
-                                 password="test_password")
+        if not User.objects.filter(username="test_user").exists():
+            User.objects.create_user(username="test_user",
+                                     password="test_password")
 
         self.client = Client()
         self.client.login(username="test_user",

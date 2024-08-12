@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import logging
 import os
+import uuid
 
 import dj_database_url
 from dotenv import load_dotenv
@@ -25,6 +26,8 @@ logger = logging.getLogger(__name__)
 
 # env variables
 load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY") or uuid.uuid4()
 
 USE_LOCAL_DB = os.getenv("USE_LOCAL_DB") == 'true'
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -105,8 +108,6 @@ if USE_LOCAL_DB:
         }
     }
 else:
-    SECRET_KEY = os.getenv("SECRET_KEY")
-    assert SECRET_KEY, "You should set your secret key! Use dotenv or set manually."
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
