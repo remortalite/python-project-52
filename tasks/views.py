@@ -37,3 +37,35 @@ class TasksShowView(View):
         task = Task.objects.get(id=id)
         return render(request, "tasks/show.html",
                       {"task": task})
+
+
+class TasksUpdateView(View):
+    def get(self, request, id, *args, **kwargs):
+        task = Task.objects.get(id=id)
+        form = TaskForm(instance=task)
+        return render(request, "tasks/update.html",
+                      {"task": task, "form": form})
+
+    def post(self, request, id, *args, **kwargs):
+        task = Task.objects.get(id=id)
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _("Задача успешно изменена"))
+            return redirect(reverse("tasks"))
+        messages.error(request, _("Ошибка изменения задачи"))
+        return render(request, "tasks/update.html",
+                      {"form": form, "task": task})
+
+
+class TasksDeleteView(View):
+    def get(self, request, id, *args, **kwargs):
+        task = Task.objects.get(id=id)
+        return render(request, "tasks/delete.html",
+                      {"task": task})
+
+    def post(self, request, id, *args, **kwargs):
+        task = Task.objects.get(id=id)
+        task.delete()
+        messages.info(request, _("Задача успешно удалена"))
+        return redirect(reverse("tasks"))

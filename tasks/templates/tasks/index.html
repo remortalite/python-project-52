@@ -5,7 +5,7 @@
 {% block content %}
 
 <h1>{% translate "Задачи" %}</h1>
-<a class="btn btn-primary" href="{% url 'tasks_create' %}">
+<a class="btn btn-primary my-2" href="{% url 'tasks_create' %}">
     {% translate "Создать задачу" %}
 </a>
 <table class="table table-striped">
@@ -26,13 +26,13 @@
                 <a href="{% url 'tasks_show' id=task.id %}">{{ task.name }}</a>
             </td>
             <td>{{ task.status }}</td>
-            <td>{{ task.author }}</td>
-            <td>{{ task.assigned_to }}</td>
+            <td>{{ task.author|default:"" }}</td>
+            <td>{{ task.assigned_to|default:"" }}</td>
             <td>{{ task.created_at|date:"d M Y H:i" }}</td>
             <td >
-                <a href="#">{% translate "Редактировать" %}</a>
+                <a href="{% url 'tasks_update' id=task.id %}">{% translate "Редактировать" %}</a>
                 <br>
-                <a href="#">{% translate "Удалить" %}</a>
+                <a href="{% url 'tasks_delete' id=task.id %}">{% translate "Удалить" %}</a>
             </td>
         </tr>
         {% endfor %}
