@@ -5,5 +5,40 @@
 {% block content %}
 
 <h1>{% translate "Задачи" %}</h1>
+<a class="btn btn-primary" href="{% url 'tasks_create' %}">
+    {% translate "Создать задачу" %}
+</a>
+<table class="table table-striped">
+    <thead>
+        <th>ID</th>
+        <th>{% translate "Имя" %}</th>
+        <th>{% translate "Статус" %}</th>
+        <th>{% translate "Автор" %}</th>
+        <th>{% translate "Исполнитель" %}</th>
+        <th>{% translate "Дата создания" %}</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>
+                <a href="{% url 'tasks_show' id=task.id %}">{{ task.name }}</a>
+            </td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.author }}</td>
+            <td>{{ task.assigned_to }}</td>
+            <td>{{ task.created_at|date:"d M Y H:i" }}</td>
+            <td >
+                <a href="#">{% translate "Редактировать" %}</a>
+                <br>
+                <a href="#">{% translate "Удалить" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
 
 {% endblock %}

@@ -1,7 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.views import View
+from django.utils.translation import gettext as _
+from django.contrib import messages
+
+from tasks.forms import TaskForm
+from tasks.models import Task
 
 
 class TasksView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "tasks/index.html")
+        tasks = Task.objects.all()
+        return render(request, "tasks/index.html",
+                      {"tasks": tasks})
+
+
+class TasksCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = TaskForm()
+        return render(request, "tasks/create.html",
+                      context={"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = TaskForm(request.POST)
+        form.author = request.user
+        if form.is_valid():
+            form.save()
+            messages.info(request, _("Задача успешно добавлена"))
+            return redirect(reverse("tasks"))
+        messages.info(request, _("Ошибка добавления задачи"))
+        return render(request, "tasks/create.html",
+                      {"form": form})
+
+
+class TasksShowView(View):
+    def get(self, request, id, *args, **kwargs):
+        task = Task.objects.get(id=id)
+        return render(request, "tasks/show.html",
+                      {"task": task})
