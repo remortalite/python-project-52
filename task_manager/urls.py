@@ -31,4 +31,5 @@ urlpatterns = [
 
     path('statuses/', include('statuses.urls')),
     path('users/', include('users.urls')),
+    path('tasks/', include('tasks.urls')),
 ]
