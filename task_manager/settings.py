@@ -152,6 +152,8 @@ LANGUAGES = (
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
+LOGIN_URL = '/login/'
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
