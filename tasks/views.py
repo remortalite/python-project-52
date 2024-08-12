@@ -62,11 +62,15 @@ class TasksUpdateView(LoginRequiredMixin, View):
 class TasksDeleteView(LoginRequiredMixin, View):
     def get(self, request, id, *args, **kwargs):
         task = Task.objects.get(id=id)
-        return render(request, "tasks/delete.html",
-                      {"task": task})
+        if task.author_id == request.user.id:
+            return render(request, "tasks/delete.html",
+                          {"task": task})
+        messages.error(request, _("Задачу может удалить только ее автор"))
+        return redirect(reverse("tasks"))
 
     def post(self, request, id, *args, **kwargs):
         task = Task.objects.get(id=id)
-        task.delete()
-        messages.info(request, _("Задача успешно удалена"))
+        if task.author_id == request.user.id:
+            task.delete()
+            messages.info(request, _("Задача успешно удалена"))
         return redirect(reverse("tasks"))
