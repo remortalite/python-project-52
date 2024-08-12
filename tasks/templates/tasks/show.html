@@ -14,15 +14,15 @@
         <table class="table">
             <tr>
                 <th>{% translate "Автор" %}</th>
-                <td>{{ task.author }}</td>
+                <td>{{ task.author|default:"" }}</td>
             </tr>
             <tr>
                 <th>{% translate "Исполнитель" %}</th>
-                <td>{{ task.assigned_to }}</td>
+                <td>{{ task.assigned_to|default:"" }}</td>
             </tr>
             <tr>
                 <th>{% translate "Статус" %}</th>
-                <td>{{ task.status }}</td>
+                <td>{{ task.status|default:"" }}</td>
             </tr>
             <tr>
                 <th>{% translate "Дата создания" %}</th>
