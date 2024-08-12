@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-12 16:44+0000\n"
+"POT-Creation-Date: 2024-08-12 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: statuses/models.py:7 statuses/templates/statuses/index.html:14
+#: tasks/models.py:9 tasks/templates/tasks/index.html:14
+msgid "Имя"
+msgstr "Name"
+
+#: statuses/models.py:8 statuses/templates/statuses/index.html:15
+#: tasks/models.py:21 tasks/templates/tasks/index.html:18
+#: tasks/templates/tasks/show.html:28 users/templates/users/users.html:13
+msgid "Дата создания"
+msgstr "Created at"
+
+#: statuses/models.py:14 tasks/models.py:15 tasks/templates/tasks/index.html:15
+#: tasks/templates/tasks/show.html:24
+msgid "Статус"
+msgstr "Status"
+
+#: statuses/models.py:15 statuses/templates/statuses/index.html:7
+#: templates/layout/base.html:27
+msgid "Статусы"
+msgstr "Statuses"
 
 #: statuses/templates/statuses/create.html:8
 #: statuses/templates/statuses/index.html:9
@@ -45,21 +66,6 @@ msgstr "Are you sure you want to delete status"
 #: users/templates/users/users.html:26
 msgid "Удалить"
 msgstr "Delete"
-
-#: statuses/templates/statuses/index.html:7 templates/layout/base.html:27
-msgid "Статусы"
-msgstr "Statuses"
-
-#: statuses/templates/statuses/index.html:14
-#: tasks/templates/tasks/index.html:14
-msgid "Имя"
-msgstr "Name"
-
-#: statuses/templates/statuses/index.html:15
-#: tasks/templates/tasks/index.html:18 tasks/templates/tasks/show.html:28
-#: users/templates/users/users.html:13
-msgid "Дата создания"
-msgstr "Created at"
 
 #: statuses/templates/statuses/index.html:25
 #: tasks/templates/tasks/index.html:33 tasks/templates/tasks/show.html:34
@@ -143,6 +149,37 @@ msgstr "Both username and password are case sensitive"
 msgid "Вы разлогинены"
 msgstr "You logged off"
 
+#: tasks/models.py:10
+msgid "Описание"
+msgstr ""
+
+#: tasks/models.py:12 tasks/templates/tasks/index.html:17
+#: tasks/templates/tasks/show.html:20
+msgid "Исполнитель"
+msgstr "Assigned"
+
+#: tasks/models.py:17 tasks/templates/tasks/index.html:16
+#: tasks/templates/tasks/show.html:16
+msgid "Автор"
+msgstr "Author"
+
+#: tasks/models.py:22
+#, fuzzy
+#| msgid "Дата создания"
+msgid "Дата изменения"
+msgstr "Created at"
+
+#: tasks/models.py:25
+#, fuzzy
+#| msgid "Задачи"
+msgid "Задача"
+msgstr "Tasks"
+
+#: tasks/models.py:26 tasks/templates/tasks/index.html:7
+#: templates/layout/base.html:35
+msgid "Задачи"
+msgstr "Tasks"
+
 #: tasks/templates/tasks/create.html:8 tasks/templates/tasks/index.html:9
 msgid "Создать задачу"
 msgstr "Create task"
@@ -158,22 +195,6 @@ msgstr "Delete user"
 #| msgid "Вы уверены, что хотите удалить статус"
 msgid "Вы уверены, что хотите удалить задачу"
 msgstr "Are you sure you want to delete status"
-
-#: tasks/templates/tasks/index.html:7 templates/layout/base.html:35
-msgid "Задачи"
-msgstr "Tasks"
-
-#: tasks/templates/tasks/index.html:15 tasks/templates/tasks/show.html:24
-msgid "Статус"
-msgstr "Status"
-
-#: tasks/templates/tasks/index.html:16 tasks/templates/tasks/show.html:16
-msgid "Автор"
-msgstr "Author"
-
-#: tasks/templates/tasks/index.html:17 tasks/templates/tasks/show.html:20
-msgid "Исполнитель"
-msgstr "Assigned"
 
 #: tasks/templates/tasks/show.html:7
 msgid "Просмотр задачи"

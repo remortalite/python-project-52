@@ -10,12 +10,12 @@ class Task(models.Model):
     description = models.TextField(_("Описание"), blank=True)
 
     assigned_to = models.ForeignKey(verbose_name=_("Исполнитель"),
-                                    to=User, on_delete=models.CASCADE,
+                                    to=User, on_delete=models.PROTECT,
                                     blank=True, null=True)
     status = models.ForeignKey(verbose_name=_("Статус"), to=Status,
-                               on_delete=models.CASCADE)
+                               on_delete=models.PROTECT)
     author = models.ForeignKey(verbose_name=_("Автор"), to=User,
-                               on_delete=models.CASCADE,
+                               on_delete=models.PROTECT,
                                related_name="author", blank=True, null=True)
 
     created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
