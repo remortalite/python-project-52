@@ -4,6 +4,9 @@ install:
 
 # development
 
+build:
+	./build.sh
+
 dev: install-dev
 	poetry run python manage.py runserver
 
