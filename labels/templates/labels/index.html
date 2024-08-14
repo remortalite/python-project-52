@@ -6,4 +6,34 @@
 
 <h1>{% translate "Метки" %}</h1>
 
+<a class="btn btn-primary my-2" href="{% url 'tasks_create' %}">
+    {% translate "Создать метку" %}
+</a>
+<table class="table table-striped">
+    <thead>
+        <th>ID</th>
+        <th>{% translate "Имя" %}</th>
+        <th>{% translate "Дата создания" %}</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {% for label in labels %}
+        <tr>
+            <td>{{ label.id }}</td>
+            <td>
+                <a href="#">{{ label.name }}</a>
+            </td>
+            <td>{{ label.created_at|date:"d M Y H:i" }}</td>
+            <td >
+                <a href="#">{% translate "Редактировать" %}</a>
+                <br>
+                <a href="#}">{% translate "Удалить" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
 {% endblock %}
