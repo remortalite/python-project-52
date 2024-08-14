@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -35,13 +35,13 @@ class CreateLabelView(View):
 
 class UpdateLabelView(View):
     def get(self, request, id, *args, **kwargs):
-        label = Label.objects.get(id=id)
+        label = get_object_or_404(Label, id=id)
         form = LabelForm(instance=label)
         return render(request, "labels/update.html",
                       {"form": form, "label": label})
 
     def post(self, request, id, *args, **kwargs):
-        label = Label.objects.get(id=id)
+        label = get_object_or_404(Label, id=id)
         form = LabelForm(request.POST, instance=label)
         if form.is_valid():
             form.save()
