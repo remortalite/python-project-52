@@ -31,3 +31,21 @@ class CreateLabelView(View):
         return render(request,
                       "labels/create.html",
                       {"form": form})
+
+
+class UpdateLabelView(View):
+    def get(self, request, id, *args, **kwargs):
+        label = Label.objects.get(id=id)
+        form = LabelForm(instance=label)
+        return render(request, "labels/update.html",
+                      {"form": form, "label": label})
+
+    def post(self, request, id, *args, **kwargs):
+        label = Label.objects.get(id=id)
+        form = LabelForm(request.POST, instance=label)
+        if form.is_valid():
+            form.save()
+            messages.info(request, _("Данные успешно сохранены"))
+            return redirect(reverse("labels"))
+        return render(request, "labels/update.html",
+                      {"form": form, "label": label})

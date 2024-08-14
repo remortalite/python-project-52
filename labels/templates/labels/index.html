@@ -20,12 +20,10 @@
         {% for label in labels %}
         <tr>
             <td>{{ label.id }}</td>
-            <td>
-                <a href="#">{{ label.name }}</a>
-            </td>
+            <td>{{ label.name }}</td>
             <td>{{ label.created_at|date:"d M Y H:i" }}</td>
             <td >
-                <a href="#">{% translate "Редактировать" %}</a>
+                <a href="{% url 'labels_update' id=label.id %}">{% translate "Редактировать" %}</a>
                 <br>
                 <a href="#}">{% translate "Удалить" %}</a>
             </td>

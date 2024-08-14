@@ -5,4 +5,6 @@ from labels import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name="labels"),
     path('create/', views.CreateLabelView.as_view(), name="labels_create"),
+    path('<int:id>/update/', views.UpdateLabelView.as_view(),
+         name="labels_update"),
 ]
