@@ -60,6 +60,9 @@ class DeleteLabelView(View):
 
     def post(self, request, id, *args, **kwargs):
         label = get_object_or_404(Label, id=id)
-        label.delete()
-        messages.info(request, _("Метка успешно удалена"))
+        if label.task_set.exists():
+            messages.error(request, _("Невозможно удалить метку, потому что она используется"))
+        else:
+            label.delete()
+            messages.info(request, _("Метка успешно удалена"))
         return redirect(reverse("labels"))

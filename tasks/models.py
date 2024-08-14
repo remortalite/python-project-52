@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
 from statuses.models import Status
+from labels.models import Label
 
 
 class Task(models.Model):
@@ -17,6 +18,10 @@ class Task(models.Model):
     author = models.ForeignKey(verbose_name=_("Автор"), to=User,
                                on_delete=models.PROTECT,
                                related_name="author", blank=True, null=True)
+
+    labels = models.ManyToManyField(verbose_name=_("Метки"),
+                                    to=Label,
+                                    blank=True)
 
     created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Дата изменения"), auto_now=True)
