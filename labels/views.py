@@ -28,3 +28,6 @@ class CreateLabelView(View):
             form.save()
             messages.info(request, _("Метка успешно создана"))
             return redirect(reverse("labels"))
+        return render(request,
+                      "labels/create.html",
+                      {"form": form})
