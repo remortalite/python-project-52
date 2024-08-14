@@ -49,3 +49,17 @@ class UpdateLabelView(View):
             return redirect(reverse("labels"))
         return render(request, "labels/update.html",
                       {"form": form, "label": label})
+
+
+class DeleteLabelView(View):
+    def get(self, request, id, *args, **kwargs):
+        label = get_object_or_404(Label, id=id)
+        return render(request,
+                      "labels/delete.html",
+                      {"label": label})
+
+    def post(self, request, id, *args, **kwargs):
+        label = get_object_or_404(Label, id=id)
+        label.delete()
+        messages.info(request, _("Метка успешно удалена"))
+        return redirect(reverse("labels"))
