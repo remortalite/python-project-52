@@ -1,6 +1,7 @@
 {% extends "layout/base.html" %}
 
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -8,6 +9,12 @@
 <a class="btn btn-primary my-2" href="{% url 'tasks_create' %}">
     {% translate "Создать задачу" %}
 </a>
+
+    <form method="get" class="form-inline center">
+        {{ filters.form|crispy }}
+        <input type="submit" />
+    </form>
+
 <table class="table table-striped">
     <thead>
         <th>ID</th>
@@ -19,7 +26,7 @@
         <th></th>
     </thead>
     <tbody>
-        {% for task in tasks %}
+        {% for task in filters.qs %}
         <tr>
             <td>{{ task.id }}</td>
             <td>

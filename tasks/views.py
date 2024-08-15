@@ -3,16 +3,21 @@ from django.views import View
 from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+import logging
 
 from tasks.forms import TaskForm
 from tasks.models import Task
+from tasks.filters import TasksFilter
+
+
+logger = logging.getLogger(__name__)
 
 
 class TasksView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
+        filters = TasksFilter(request.GET, queryset=Task.objects.all())
         return render(request, "tasks/index.html",
-                      {"tasks": tasks})
+                      {"filters": filters})
 
 
 class TasksCreateView(LoginRequiredMixin, View):
