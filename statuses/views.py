@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -9,7 +9,6 @@ from statuses.forms import StatusForm
 
 
 class IndexView(LoginRequiredMixin, View):
-    login_url = "/login/"
 
     def get(self, request, *args, **kwargs):
         statuses = Status.objects.all()
@@ -18,7 +17,6 @@ class IndexView(LoginRequiredMixin, View):
 
 
 class StatusCreateView(LoginRequiredMixin, View):
-    login_url = "/login/"
 
     def get(self, request, *args, **kwargs):
         form = StatusForm()
@@ -38,13 +36,13 @@ class StatusCreateView(LoginRequiredMixin, View):
 class StatusUpdateView(LoginRequiredMixin, View):
 
     def get(self, request, id, *args, **kwargs):
-        status = Status.objects.get(id=id)
+        status = get_object_or_404(Status, id=id)
         form = StatusForm(instance=status)
         return render(request, "statuses/update.html",
                       context={"form": form, "status_id": id})
 
     def post(self, request, id, *args, **kwargs):
-        status = Status.objects.get(id=id)
+        status = get_object_or_404(Status, id=id)
         form = StatusForm(request.POST, instance=status)
         if form.is_valid():
             form.save()
@@ -56,13 +54,16 @@ class StatusUpdateView(LoginRequiredMixin, View):
 
 class StatusDeleteView(LoginRequiredMixin, View):
     def get(self, request, id, *args, **kwargs):
-        status = Status.objects.get(id=id)
+        status = get_object_or_404(Status, id=id)
         return render(request, "statuses/delete.html",
                       context={"status_id": id, "status": status})
 
     def post(self, request, id, *args, **kwargs):
-        status = Status.objects.get(id=id)
-        if status:
+        status = get_object_or_404(Status, id=id)
+        if status.task_set.exists():
+            messages.error(request, _("Невозможно удалить статус, "
+                                      "потому что он используется"))
+        else:
             status.delete()
-        messages.info(request, _("Статус успешно удален"))
+            messages.info(request, _("Статус успешно удален"))
         return redirect(reverse("statuses"))

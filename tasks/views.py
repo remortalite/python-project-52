@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views import View
 from django.utils.translation import gettext as _
 from django.contrib import messages
@@ -36,27 +36,26 @@ class TasksCreateView(LoginRequiredMixin, View):
             obj.save()
             messages.info(request, _("Задача успешно добавлена"))
             return redirect(reverse("tasks"))
-        messages.info(request, _("Ошибка добавления задачи"))
         return render(request, "tasks/create.html",
                       {"form": form}, status=300)
 
 
 class TasksShowView(LoginRequiredMixin, View):
     def get(self, request, id, *args, **kwargs):
-        task = Task.objects.get(id=id)
+        task = get_object_or_404(Task, id=id)
         return render(request, "tasks/show.html",
                       {"task": task})
 
 
 class TasksUpdateView(LoginRequiredMixin, View):
     def get(self, request, id, *args, **kwargs):
-        task = Task.objects.get(id=id)
+        task = get_object_or_404(Task, id=id)
         form = TaskForm(instance=task)
         return render(request, "tasks/update.html",
                       {"task": task, "form": form})
 
     def post(self, request, id, *args, **kwargs):
-        task = Task.objects.get(id=id)
+        task = get_object_or_404(Task, id=id)
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
@@ -69,7 +68,7 @@ class TasksUpdateView(LoginRequiredMixin, View):
 
 class TasksDeleteView(LoginRequiredMixin, View):
     def get(self, request, id, *args, **kwargs):
-        task = Task.objects.get(id=id)
+        task = get_object_or_404(Task, id=id)
         if task.author_id == request.user.id:
             return render(request, "tasks/delete.html",
                           {"task": task})
@@ -77,7 +76,7 @@ class TasksDeleteView(LoginRequiredMixin, View):
         return redirect(reverse("tasks"))
 
     def post(self, request, id, *args, **kwargs):
-        task = Task.objects.get(id=id)
+        task = get_object_or_404(Task, id=id)
         if task.author_id == request.user.id:
             task.delete()
             messages.info(request, _("Задача успешно удалена"))
