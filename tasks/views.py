@@ -15,7 +15,9 @@ logger = logging.getLogger(__name__)
 
 class TasksView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        filters = TasksFilter(request.GET, queryset=Task.objects.all())
+        filters = TasksFilter(request.GET,
+                              queryset=Task.objects.all(),
+                              request=request)
         return render(request, "tasks/index.html",
                       {"filters": filters})
 
