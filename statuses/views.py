@@ -30,7 +30,8 @@ class StatusCreateView(LoginRequiredMixin, View):
             messages.info(request, _("Статус успешно создан"))
             return redirect(reverse("statuses"))
         return render(request, "statuses/create.html",
-                      {"form": form})
+                      {"form": form},
+                      status=400)
 
 
 class StatusUpdateView(LoginRequiredMixin, View):
@@ -49,7 +50,8 @@ class StatusUpdateView(LoginRequiredMixin, View):
             messages.info(request, _("Статус успешно изменен"))
             return redirect(reverse("statuses"))
         return render(request, "statuses/update.html",
-                      {"form": form, "status_id": id})
+                      {"form": form, "status_id": id},
+                      status=400)
 
 
 class StatusDeleteView(LoginRequiredMixin, View):

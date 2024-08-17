@@ -37,7 +37,7 @@ class TasksCreateView(LoginRequiredMixin, View):
             messages.info(request, _("Задача успешно создана"))
             return redirect(reverse("tasks"))
         return render(request, "tasks/create.html",
-                      {"form": form}, status=300)
+                      {"form": form}, status=400)
 
 
 class TasksShowView(LoginRequiredMixin, View):
@@ -62,7 +62,8 @@ class TasksUpdateView(LoginRequiredMixin, View):
             messages.info(request, _("Задача успешно изменена"))
             return redirect(reverse("tasks"))
         return render(request, "tasks/update.html",
-                      {"form": form, "task": task})
+                      {"form": form, "task": task},
+                      status=400)
 
 
 class TasksDeleteView(LoginRequiredMixin, View):

@@ -29,7 +29,8 @@ class UserFormView(views.View):
             messages.info(request, _("Пользователь успешно зарегистрирован"))
             return redirect(reverse('login'))
         return render(request, "users/signup.html",
-                      {"form": form})
+                      {"form": form},
+                      status=400)
 
 
 class UserUpdateView(LoginRequiredMixin, views.View):
@@ -57,7 +58,8 @@ class UserUpdateView(LoginRequiredMixin, views.View):
             messages.info(request, _("Пользователь успешно изменен"))
             return redirect(reverse('index'))
         return render(request, "users/update.html",
-                      {"form": form, "user_id": id})
+                      {"form": form, "user_id": id},
+                      status=400)
 
     def handle_no_permission(self, *args, **kwargs):
         messages.error(self.request, _("Вы не авторизованы! "

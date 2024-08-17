@@ -29,7 +29,7 @@ class LoginView(views.View):
         return render(request,
                       "task_manager/login.html",
                       context={"username": username},
-                      status=403)
+                      status=400)
 
 
 class LogoutView(views.View):

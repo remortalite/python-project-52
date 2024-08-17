@@ -31,7 +31,8 @@ class CreateLabelView(LoginRequiredMixin, View):
             return redirect(reverse("labels"))
         return render(request,
                       "labels/create.html",
-                      {"form": form})
+                      {"form": form},
+                      status=400)
 
 
 class UpdateLabelView(LoginRequiredMixin, View):
@@ -49,7 +50,8 @@ class UpdateLabelView(LoginRequiredMixin, View):
             messages.info(request, _("Метка успешно изменена"))
             return redirect(reverse("labels"))
         return render(request, "labels/update.html",
-                      {"form": form, "label": label})
+                      {"form": form, "label": label},
+                      status=400)
 
 
 class DeleteLabelView(LoginRequiredMixin, View):
