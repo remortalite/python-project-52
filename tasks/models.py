@@ -10,9 +10,9 @@ class Task(models.Model):
     name = models.CharField(_("Имя"), max_length=128, null=False)
     description = models.TextField(_("Описание"), blank=True)
 
-    assigned_to = models.ForeignKey(verbose_name=_("Исполнитель"),
-                                    to=User, on_delete=models.PROTECT,
-                                    blank=True, null=True)
+    executor = models.ForeignKey(verbose_name=_("Исполнитель"),
+                                 to=User, on_delete=models.PROTECT,
+                                 blank=True, null=True)
     status = models.ForeignKey(verbose_name=_("Статус"), to=Status,
                                on_delete=models.PROTECT)
     author = models.ForeignKey(verbose_name=_("Автор"), to=User,

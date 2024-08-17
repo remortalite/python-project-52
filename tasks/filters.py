@@ -17,7 +17,7 @@ class TasksFilter(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ["status", "assigned_to", "labels"]
+        fields = ["status", "executor", "labels"]
 
     def is_author(self, queryset, name, value):
         author = getattr(self.request, 'user', None)
