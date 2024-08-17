@@ -33,8 +33,6 @@ class UserFormView(views.View):
 
 
 class UserUpdateView(LoginRequiredMixin, views.View):
-    login_url = '/login/'
-    error_message = "login required"
 
     def get(self, request, id, *args, **kwargs):
         if request.user.id != id:
@@ -62,12 +60,12 @@ class UserUpdateView(LoginRequiredMixin, views.View):
                       {"form": form, "user_id": id})
 
     def handle_no_permission(self, *args, **kwargs):
-        messages.error(self.request, _("Необходимо авторизоваться!"))
+        messages.error(self.request, _("Вы не авторизованы! "
+                                       "Пожалуйста, выполните вход."))
         return super().handle_no_permission()
 
 
 class UserDeleteView(LoginRequiredMixin, views.View):
-    login_url = "/login/"
 
     def get(self, request, id, *args, **kwargs):
         if request.user.id != id:
@@ -93,5 +91,6 @@ class UserDeleteView(LoginRequiredMixin, views.View):
         return redirect(reverse("users"))
 
     def handle_no_permission(self, *args, **kwargs):
-        messages.error(self.request, _("Необходимо авторизоваться!"))
+        messages.error(self.request, _("Вы не авторизованы! "
+                                       "Пожалуйста, выполните вход."))
         return super().handle_no_permission()
