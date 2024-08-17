@@ -38,7 +38,7 @@
             <td>{{ task.assigned_to|default:"" }}</td>
             <td>{{ task.created_at|date:"d M Y H:i" }}</td>
             <td >
-                <a href="{% url 'tasks_update' id=task.id %}">{% translate "Редактировать" %}</a>
+                <a href="{% url 'tasks_update' id=task.id %}">{% translate "Изменить" %}</a>
                 <br>
                 <a href="{% url 'tasks_delete' id=task.id %}">{% translate "Удалить" %}</a>
             </td>

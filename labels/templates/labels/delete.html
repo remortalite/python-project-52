@@ -9,7 +9,7 @@
 <form class="form col-6" method="post" action="{% url 'labels_delete' id=label.id %}">
     {% csrf_token %}
     <div class="form-outline col-2">
-        <input type="submit" class="btn btn-primary w-100" value="{% translate 'Удалить' %}">
+        <input type="submit" class="btn btn-primary w-100" value="{% translate 'Да, удалить' %}">
     </div>
 </form>
 

@@ -34,6 +34,7 @@ class TasksCreateView(LoginRequiredMixin, View):
             obj = form.save(commit=False)
             obj.author = request.user
             obj.save()
+            form.save_m2m()
             messages.info(request, _("Задача успешно создана"))
             return redirect(reverse("tasks"))
         return render(request, "tasks/create.html",

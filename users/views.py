@@ -55,7 +55,7 @@ class UserUpdateView(LoginRequiredMixin, views.View):
         if form.is_valid():
             form.save()
             messages.info(request, _("Пользователь успешно изменен"))
-            return redirect(reverse('index'))
+            return redirect(reverse('users'))
         return render(request, "users/update.html",
                       {"form": form, "user_id": id},
                       status=400)
