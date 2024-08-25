@@ -1,71 +1,42 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.views import View
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from statuses.models import Status
-from statuses.forms import StatusForm
 
 
-class IndexView(LoginRequiredMixin, View):
-
-    def get(self, request, *args, **kwargs):
-        statuses = Status.objects.all()
-        return render(request, "statuses/index.html",
-                      context={"statuses": statuses})
+class StatusListView(LoginRequiredMixin, ListView):
+    model = Status
 
 
-class StatusCreateView(LoginRequiredMixin, View):
-
-    def get(self, request, *args, **kwargs):
-        form = StatusForm()
-        return render(request, "statuses/create.html",
-                      {"form": form})
+class StatusCreateView(LoginRequiredMixin, CreateView):
+    model = Status
+    fields = ["name"]
+    success_url = reverse_lazy("statuses")
 
     def post(self, request, *args, **kwargs):
-        form = StatusForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.info(request, _("Статус успешно создан"))
-            return redirect(reverse("statuses"))
-        return render(request, "statuses/create.html",
-                      {"form": form},
-                      status=400)
+        messages.info(request, _("Статус успешно создан"))
+        return super().post(self, request, *args, **kwargs)
 
 
-class StatusUpdateView(LoginRequiredMixin, View):
+class StatusUpdateView(LoginRequiredMixin, UpdateView):
+    model = Status
+    fields = ["name"]
+    template_name_suffix = "_update_form"
+    success_url = reverse_lazy("statuses")
 
-    def get(self, request, id, *args, **kwargs):
-        status = get_object_or_404(Status, id=id)
-        form = StatusForm(instance=status)
-        return render(request, "statuses/update.html",
-                      context={"form": form, "status_id": id})
-
-    def post(self, request, id, *args, **kwargs):
-        status = get_object_or_404(Status, id=id)
-        form = StatusForm(request.POST, instance=status)
-        if form.is_valid():
-            form.save()
-            messages.info(request, _("Статус успешно изменен"))
-            return redirect(reverse("statuses"))
-        return render(request, "statuses/update.html",
-                      {"form": form, "status_id": id},
-                      status=400)
+    def post(self, request, *args, **kwargs):
+        messages.info(request, _("Статус успешно изменен"))
+        return super().post(self, request, *args, **kwargs)
 
 
-class StatusDeleteView(LoginRequiredMixin, View):
-    def get(self, request, id, *args, **kwargs):
-        status = get_object_or_404(Status, id=id)
-        return render(request, "statuses/delete.html",
-                      context={"status_id": id, "status": status})
+class StatusDeleteView(LoginRequiredMixin, DeleteView):
+    model = Status
+    success_url = reverse_lazy("statuses")
 
-    def post(self, request, id, *args, **kwargs):
-        status = get_object_or_404(Status, id=id)
-        if status.task_set.exists():
-            messages.error(request, _("Невозможно удалить статус, "
-                                      "потому что он используется"))
-        else:
-            status.delete()
-            messages.info(request, _("Статус успешно удален"))
-        return redirect(reverse("statuses"))
+    def post(self, request, *args, **kwargs):
+        messages.info(request, _("Статус успешно удален"))
+        return super().post(self, request, *args, **kwargs)

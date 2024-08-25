@@ -60,13 +60,13 @@ class StatusViewTest(unittest.TestCase):
 
         status = Status.objects.get(name="test_status")
         response = self.client.get(reverse("statuses_update",
-                                           kwargs={"id": status.id}))
+                                           kwargs={"pk": status.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"test_status", response.content)
 
         response = self.client.post(reverse("statuses_update",
-                                            kwargs={"id": status.id}),
+                                            kwargs={"pk": status.id}),
                                     data={"name": "test_status_updated"})
 
         self.assertTrue(Status.objects.filter(name="test_status_updated")
@@ -80,7 +80,7 @@ class StatusViewTest(unittest.TestCase):
         status = Status.objects.get(name="test_status")
 
         self.client.post(reverse("statuses_delete",
-                                 kwargs={"id": status.id}))
+                                 kwargs={"pk": status.id}))
 
         self.assertFalse(Status.objects.filter(name="test_status").exists())
 

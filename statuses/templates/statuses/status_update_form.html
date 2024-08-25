@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>{% translate "Изменение статуса" %}</h1>
-<form class="form col-5 py-2" action="{% url 'statuses_update' id=status_id %}" method="post">
+<form class="form col-5 py-2" action="{% url 'statuses_update' pk=status.id %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
 
