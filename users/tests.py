@@ -54,7 +54,7 @@ class TestUserFormView(unittest.TestCase):
         user = User.objects.get(username="test_user")
 
         response = client.get(reverse("users_update",
-                                      kwargs={"id": user.id}))
+                                      kwargs={"pk": user.id}))
 
         self.assertEqual(response.status_code, 302)
 
@@ -65,7 +65,7 @@ class TestUserFormView(unittest.TestCase):
                      password="test_password")
         user = User.objects.get(username="test_user")
         response = client.get(reverse("users_update",
-                                      kwargs={"id": user.id}))
+                                      kwargs={"pk": user.id}))
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"test_user", response.content)
@@ -74,7 +74,7 @@ class TestUserFormView(unittest.TestCase):
         client.post(reverse("logout"))
 
         response = client.get(reverse("users_update",
-                                      kwargs={"id": user.id}))
+                                      kwargs={"pk": user.id}))
         self.assertEqual(response.status_code, 302)
 
     def test_delete(self):
@@ -87,7 +87,7 @@ class TestUserFormView(unittest.TestCase):
         user = User.objects.get(username="test_user_delete")
 
         client.post(reverse("users_delete",
-                            kwargs={"id": user.id}))
+                            kwargs={"pk": user.id}))
 
         self.assertFalse(
             User

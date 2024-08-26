@@ -40,13 +40,3 @@ class UserUpdateForm(forms.ModelForm):
                            _("Пароли не совпадают"))
 
         return cleaned_data
-
-
-def get_full_name(self):
-    full_name = self.first_name + " " + self.last_name
-    if not full_name.strip():
-        return self.username
-    return full_name
-
-
-User.add_to_class("__str__", get_full_name)
