@@ -87,7 +87,7 @@ class LabelTest(TestCase):
     def test_LabelUpdateView(self):
         response = self.client.get(
             reverse("labels_update",
-                    kwargs={"id": self.label.id}),
+                    kwargs={"pk": self.label.id}),
             headers={"accept-language": "en"},
         )
 
@@ -96,7 +96,7 @@ class LabelTest(TestCase):
 
         response = self.client.post(
             reverse("labels_update",
-                    kwargs={"id": self.label.id}),
+                    kwargs={"pk": self.label.id}),
             headers={"accept-language": "en"},
             data={
                 "name": "test_label_updated",
@@ -114,7 +114,7 @@ class LabelTest(TestCase):
     def test_LabelDeleteView(self):
         response = self.client.post(
             reverse("labels_delete",
-                    kwargs={"id": self.label.id}),
+                    kwargs={"pk": self.label.id}),
             headers={"accept-language": "en"},
         )
         self.assertEqual(response.status_code, 302)
@@ -123,7 +123,7 @@ class LabelTest(TestCase):
         self.label.task_set.all().delete()
         response = self.client.post(
             reverse("labels_delete",
-                    kwargs={"id": self.label.id}),
+                    kwargs={"pk": self.label.id}),
             headers={"accept-language": "en"},
         )
         self.assertEqual(response.status_code, 302)

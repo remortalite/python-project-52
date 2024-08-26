@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>{% translate "Редактировать метку" %}</h1>
-<form class="form col-5 py-2" action="{% url 'labels_update' id=label.id %}" method="post">
+<form class="form col-5 py-2" action="{% url 'labels_update' pk=label.id %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
 
