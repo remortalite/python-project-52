@@ -2,7 +2,7 @@ from django import views
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 
 class IndexView(views.View):

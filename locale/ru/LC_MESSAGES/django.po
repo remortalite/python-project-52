@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 14:04+0000\n"
+"POT-Creation-Date: 2024-08-27 14:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgstr "Статус успешно удален"
 #: statuses/views.py:40
 #, fuzzy
 #| msgid "You can't delete user because it's in use"
-msgid "You can't delete status while it's in use"
+msgid "You can't delete statuswhile it's in use"
 msgstr "Вы не можете удалить статус, потому что он используется"
 
 #: task_manager/settings.py:158
@@ -177,7 +177,6 @@ msgid "Learn more"
 msgstr "Узнать больше"
 
 #: task_manager/templates/task_manager/login.html:7
-#: task_manager/templates/task_manager/login.html:36
 #: templates/layout/base.html:47
 msgid "Log in"
 msgstr "Вход"
@@ -187,8 +186,7 @@ msgid "Hello"
 msgstr "Привет"
 
 #: task_manager/templates/task_manager/login.html:15
-#: templates/layout/base.html:41
-msgid "Log out"
+msgid "Logout"
 msgstr "Выйти"
 
 #: task_manager/templates/task_manager/login.html:22
@@ -199,6 +197,10 @@ msgstr "Имя пользователя"
 #: task_manager/templates/task_manager/login.html:29 users/forms.py:17
 msgid "Password"
 msgstr "Пароль"
+
+#: task_manager/templates/task_manager/login.html:36
+msgid "Login"
+msgstr "Войти"
 
 #: task_manager/views.py:23
 msgid "You logged in"
@@ -271,19 +273,19 @@ msgstr "Показать"
 msgid "Edit task"
 msgstr "Изменение задачи"
 
-#: tasks/views.py:34
+#: tasks/views.py:35
 msgid "Task created"
 msgstr "Задача успешно создана"
 
-#: tasks/views.py:52
+#: tasks/views.py:53
 msgid "Task updated"
 msgstr "Задача успешно обновлена"
 
-#: tasks/views.py:58
+#: tasks/views.py:59
 msgid "Task deleted"
 msgstr "Задача успешно удалена"
 
-#: tasks/views.py:64 tasks/views.py:71
+#: tasks/views.py:65 tasks/views.py:72
 msgid "Task can be deleted only by author"
 msgstr "Задачу может удалить только ее автор"
 
@@ -294,6 +296,10 @@ msgstr "Менеджер задач"
 #: templates/layout/base.html:21 users/templates/auth/user_list.html:7
 msgid "Users"
 msgstr "Пользователи"
+
+#: templates/layout/base.html:41
+msgid "Log out"
+msgstr "Выход"
 
 #: templates/layout/base.html:50 users/templates/auth/user_form.html:8
 msgid "Sign up"
@@ -320,9 +326,7 @@ msgid "Are you sure you want to delete user"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
 #: users/templates/auth/user_form.html:14
-#, fuzzy
-#| msgid "Sign up"
-msgid "Sign me up"
+msgid "Signup"
 msgstr "Зарегистрировать"
 
 #: users/templates/auth/user_list.html:12
@@ -333,26 +337,26 @@ msgstr "Полное имя"
 msgid "Edit user"
 msgstr "Изменение пользователя"
 
-#: users/views.py:22
+#: users/views.py:21
 msgid "User created"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:30
+#: users/views.py:29
 msgid "User updated"
 msgstr "Пользователь успешно изменен"
 
-#: users/views.py:36
+#: users/views.py:35
 msgid "You can't edit another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:43
+#: users/views.py:42
 msgid "User deleted"
 msgstr "Пользователь удален"
 
-#: users/views.py:48
+#: users/views.py:47
 msgid "You can't update another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:56
+#: users/views.py:55
 msgid "You can't delete user because it's in use"
 msgstr "Вы не можете удалить пользователя, потому что он используется"
