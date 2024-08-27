@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 10:02+0000\n"
+"POT-Creation-Date: 2024-08-27 10:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
 #: labels/models.py:6 labels/templates/labels/label_list.html:15
 #: statuses/models.py:7 statuses/templates/statuses/status_list.html:14
 #: tasks/models.py:10 tasks/templates/tasks/task_list.html:22
@@ -33,7 +34,7 @@ msgstr "Имя"
 msgid "Created at"
 msgstr "Дата создания"
 
-#: labels/models.py:16
+#: labels/models.py:16 tasks/filters.py:16
 msgid "Label"
 msgstr "Метка"
 
@@ -200,7 +201,9 @@ msgstr "Вы залогинены"
 #: task_manager/views.py:26
 msgid ""
 "Please enter correct username and password. Both fields are case sensitive"
-msgstr "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру."
+msgstr ""
+"Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
+"быть чувствительны к регистру."
 
 #: task_manager/views.py:37
 msgid "You logged out"
