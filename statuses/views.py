@@ -1,5 +1,5 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
@@ -12,31 +12,22 @@ class StatusListView(LoginRequiredMixin, ListView):
     model = Status
 
 
-class StatusCreateView(LoginRequiredMixin, CreateView):
+class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Status
     fields = ["name"]
     success_url = reverse_lazy("statuses")
-
-    def post(self, request, *args, **kwargs):
-        messages.info(request, _("Статус успешно создан"))
-        return super().post(self, request, *args, **kwargs)
+    success_message = _("Статус успешно создан")
 
 
-class StatusUpdateView(LoginRequiredMixin, UpdateView):
+class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     fields = ["name"]
     template_name_suffix = "_update_form"
     success_url = reverse_lazy("statuses")
-
-    def post(self, request, *args, **kwargs):
-        messages.info(request, _("Статус успешно изменен"))
-        return super().post(self, request, *args, **kwargs)
+    success_message = _("Статус успешно изменен")
 
 
-class StatusDeleteView(LoginRequiredMixin, DeleteView):
+class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     success_url = reverse_lazy("statuses")
-
-    def post(self, request, *args, **kwargs):
-        messages.info(request, _("Статус успешно удален"))
-        return super().post(self, request, *args, **kwargs)
+    success_message = _("Статус успешно удален")
