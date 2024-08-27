@@ -31,7 +31,7 @@ class TaskListView(LoginRequiredMixin, ListView):
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     success_url = reverse_lazy("tasks")
-    success_message = _("Задача успешно создана")
+    success_message = _("Task created")
     fields = ["name", "description", "executor", "status", "labels"]
 
     def post(self, request, *args, **kwargs):
@@ -49,25 +49,25 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ["name", "description", "executor", "status", "labels"]
     success_url = reverse_lazy("tasks")
-    success_message = _("Задача успешно изменена")
+    success_message = _("Task updated")
     template_name_suffix = "_update"
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    success_message = _("Задача успешно удалена")
+    success_message = _("Task deleted")
     success_url = reverse_lazy("tasks")
 
     def get(self, request, pk, *args, **kwargs):
         data = super().get(request, pk, *args, **kwargs)
         if self.object.author_id != request.user.id:
-            messages.error(request, _("Задачу может удалить только ее автор"))
+            messages.error(request, _("Task can be deleted only by author"))
             return redirect(reverse_lazy('tasks'))
         return data
 
     def post(self, request, pk, *args, **kwargs):
         data = super().post(request, pk, *args, **kwargs)
         if self.object.author_id != request.user.id:
-            messages.error(request, _("Задачу может удалить только ее автор"))
+            messages.error(request, _("Task can be deleted only by author"))
             return redirect(reverse_lazy('tasks'))
         return data

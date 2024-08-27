@@ -15,39 +15,39 @@
         <nav class="navbar navbar-dark navbar-expand-md justify-content-between">
             <ul class="navbar-nav align-items-center mr-auto">
                 <li class="nav-item">
-                    <a href="/" class="navbar-brand">{% translate "Менеджер задач" %}</a>
+                    <a href="/" class="navbar-brand">{% translate "Task manager" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'users' %}" class="nav-link">{% translate "Пользователи" %}</a>
+                    <a href="{% url 'users' %}" class="nav-link">{% translate "Users" %}</a>
                 </li>
 
                 {% if request.user.is_authenticated %}
 
                 <li class="nav-item">
-                    <a href="{% url 'statuses' %}" class="nav-link">{% translate "Статусы" %}</a>
+                    <a href="{% url 'statuses' %}" class="nav-link">{% translate "Statuses" %}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{% url 'labels' %}" class="nav-link">{% translate "Метки" %}</a>
+                    <a href="{% url 'labels' %}" class="nav-link">{% translate "Labels" %}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{% url 'tasks' %}" class="nav-link">{% translate "Задачи" %}</a>
+                    <a href="{% url 'tasks' %}" class="nav-link">{% translate "Tasks" %}</a>
                 </li>
 
                 <li class="nav-item">
                     <form action="{% url 'logout' %}" method="POST">
                         {% csrf_token %}
-                        <input type="submit" class="nav-link" value="{% translate 'Выход' %}">
+                        <input type="submit" class="nav-link" value="{% translate 'Log out' %}">
                     </form>
                 </li>
 
                 {% else %}
                 <li class="nav-item">
-                    <a href="{% url 'login' %}" class="nav-link">{% translate "Вход" %}</a>
+                    <a href="{% url 'login' %}" class="nav-link">{% translate "Log in" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'users_create' %}" class="nav-link">{% translate "Регистрация" %}</a>
+                    <a href="{% url 'users_create' %}" class="nav-link">{% translate "Sign up" %}</a>
                 </li>
                 {% endif %}
             </ul>

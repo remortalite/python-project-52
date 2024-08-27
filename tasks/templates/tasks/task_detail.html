@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1 class="py-3">{% translate "Просмотр задачи" %}</h1>
+<h1 class="py-3">{% translate "Task Detail" %}</h1>
 
 <div class="card">
     <div class="card-header bg-secondary text-light">
@@ -15,23 +15,23 @@
         <hr>
         <table class="table">
             <tr>
-                <th>{% translate "Автор" %}</th>
+                <th>{% translate "Author" %}</th>
                 <td>{{ task.author|default:"" }}</td>
             </tr>
             <tr>
-                <th>{% translate "Исполнитель" %}</th>
+                <th>{% translate "Executor" %}</th>
                 <td>{{ task.executor|default:"" }}</td>
             </tr>
             <tr>
-                <th>{% translate "Статус" %}</th>
+                <th>{% translate "Status" %}</th>
                 <td>{{ task.status|default:"" }}</td>
             </tr>
             <tr>
-                <th>{% translate "Дата создания" %}</th>
+                <th>{% translate "Created at" %}</th>
                 <td>{{ task.created_at }}</td>
             </tr>
         </table>
-        <h5>{% translate "Метки" %}:</h5>
+        <h5>{% translate "Labels" %}:</h5>
         <ul>
             {% for label in task.labels.all %}
             <li>{{ label.name }}</li>
@@ -39,12 +39,12 @@
         </ul>
         <div class="pt-2">
             <a href="{% url 'tasks_update' pk=task.id %}">
-                {% translate "Изменить" %}
+                {% translate "Edit" %}
             </a>
         </div>
         <div class="pt-2" >
             <a href="{% url 'tasks_delete' pk=task.id %}">
-                {% translate "Удалить" %}
+                {% translate "Delete" %}
             </a>
         </div>
     </div>

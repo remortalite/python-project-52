@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<h1 class="h1">{% translate "Удаление пользователя" %}</h1>
-<p class="py-2">{% translate "Вы уверены, что хотите удалить пользователя"%} {{ user.first_name }} {{ user.second_name }}?</p>
+<h1 class="h1">{% translate "Delete user" %}</h1>
+<p class="py-2">{% translate "Are you sure you want to delete user"%} {{ user.get_full_name }}?</p>
 <form class="form col-6" method="post" action="{% url 'users_delete' pk=user.id %}">
     {% csrf_token %}
     <div class="form-outline col-3">
-        <input type="submit" class="btn btn-primary w-100" value="{% translate 'Да, удалить' %}">
+        <input type="submit" class="btn btn-primary w-100" value="{% translate 'Yes, delete' %}">
     </div>
 </form>
 
