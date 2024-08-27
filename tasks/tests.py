@@ -84,7 +84,7 @@ class TasksTest(TestCase):
     def test_TaskUpdateView(self):
         response = self.client.get(
             reverse("tasks_update",
-                    kwargs={"id": self.task.id}),
+                    kwargs={"pk": self.task.id}),
             headers={"accept-language": "en"},
         )
 
@@ -93,7 +93,7 @@ class TasksTest(TestCase):
 
         response = self.client.post(
             reverse("tasks_update",
-                    kwargs={"id": self.task.id}),
+                    kwargs={"pk": self.task.id}),
             headers={"accept-language": "en"},
             data={
                 "name": "test_task_updated",
@@ -111,7 +111,7 @@ class TasksTest(TestCase):
     def test_TaskDeleteView(self):
         response = self.client.post(
             reverse("tasks_delete",
-                    kwargs={"id": self.task.id}),
+                    kwargs={"pk": self.task.id}),
         )
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Task.objects.filter(name="test_task").exists())
