@@ -351,7 +351,7 @@ msgstr "У вас нет прав для изменения другого по�
 
 #: users/views.py:42
 msgid "User deleted"
-msgstr "Пользователь удален"
+msgstr "Пользователь успешно удален"
 
 #: users/views.py:47
 msgid "You can't update another user"
