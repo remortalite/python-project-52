@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-27 14:50+0000\n"
+"POT-Creation-Date: 2024-09-04 14:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "Имя"
 #: statuses/models.py:8 statuses/templates/statuses/status_list.html:15
 #: tasks/models.py:26 tasks/templates/tasks/task_detail.html:30
 #: tasks/templates/tasks/task_list.html:26
-#: users/templates/auth/user_list.html:13
+#: users/templates/users/user_list.html:13
 msgid "Created at"
 msgstr "Дата создания"
 
@@ -55,7 +55,7 @@ msgstr "Вы уверены, что хотите удалить"
 #: labels/templates/labels/label_confirm_delete.html:12
 #: statuses/templates/statuses/status_confirm_delete.html:12
 #: tasks/templates/tasks/task_confirm_delete.html:12
-#: users/templates/auth/user_confirm_delete.html:12
+#: users/templates/users/user_confirm_delete.html:12
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
@@ -77,8 +77,8 @@ msgstr "Создать"
 #: tasks/templates/tasks/task_detail.html:42
 #: tasks/templates/tasks/task_list.html:41
 #: tasks/templates/tasks/task_update.html:13
-#: users/templates/auth/user_list.html:24
-#: users/templates/auth/user_update.html:14
+#: users/templates/users/user_list.html:24
+#: users/templates/users/user_update.html:14
 msgid "Edit"
 msgstr "Изменить"
 
@@ -86,7 +86,7 @@ msgstr "Изменить"
 #: statuses/templates/statuses/status_list.html:27
 #: tasks/templates/tasks/task_detail.html:47
 #: tasks/templates/tasks/task_list.html:43
-#: users/templates/auth/user_list.html:26
+#: users/templates/users/user_list.html:26
 msgid "Delete"
 msgstr "Удалить"
 
@@ -108,7 +108,7 @@ msgstr "Метка успешно удалена"
 
 #: labels/views.py:40
 msgid "Can't delete label because it's in use"
-msgstr "Невозможно удалить метку, потому что она используется"
+msgstr "Невозможно удалить метку"
 
 #: statuses/models.py:14 tasks/models.py:16
 #: tasks/templates/tasks/task_detail.html:26
@@ -153,14 +153,14 @@ msgstr "Статус успешно удален"
 #: statuses/views.py:40
 #, fuzzy
 #| msgid "You can't delete user because it's in use"
-msgid "You can't delete statuswhile it's in use"
-msgstr "Вы не можете удалить статус, потому что он используется"
+msgid "You can't delete status while it's in use"
+msgstr "Невозможно удалить статус"
 
-#: task_manager/settings.py:158
+#: task_manager/settings.py:159
 msgid "Russian"
 msgstr "Русский"
 
-#: task_manager/settings.py:159
+#: task_manager/settings.py:160
 msgid "English"
 msgstr ""
 
@@ -190,11 +190,11 @@ msgid "Logout"
 msgstr "Выйти"
 
 #: task_manager/templates/task_manager/login.html:22
-#: users/templates/auth/user_list.html:11
+#: users/templates/users/user_list.html:11
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: task_manager/templates/task_manager/login.html:29 users/forms.py:17
+#: task_manager/templates/task_manager/login.html:29
 msgid "Password"
 msgstr "Пароль"
 
@@ -279,7 +279,7 @@ msgstr "Задача успешно создана"
 
 #: tasks/views.py:53
 msgid "Task updated"
-msgstr "Задача успешно обновлена"
+msgstr "Задача успешно изменена"
 
 #: tasks/views.py:59
 msgid "Task deleted"
@@ -293,7 +293,7 @@ msgstr "Задачу может удалить только ее автор"
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: templates/layout/base.html:21 users/templates/auth/user_list.html:7
+#: templates/layout/base.html:21 users/templates/users/user_list.html:7
 msgid "Users"
 msgstr "Пользователи"
 
@@ -301,62 +301,63 @@ msgstr "Пользователи"
 msgid "Log out"
 msgstr "Выход"
 
-#: templates/layout/base.html:50 users/templates/auth/user_form.html:8
+#: templates/layout/base.html:50 users/templates/users/user_form.html:8
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: users/forms.py:21
-msgid "Confirm password"
-msgstr "Подтверждение пароля"
-
-#: users/forms.py:36
-msgid "Password should be at least 3 symbols"
-msgstr "Пароль должен быть минимум 3 символа"
-
-#: users/forms.py:40
-msgid "Passwords doesn't match"
-msgstr "Пароли не совпадают"
-
-#: users/templates/auth/user_confirm_delete.html:7
+#: users/templates/users/user_confirm_delete.html:7
 msgid "Delete user"
 msgstr "Удалить пользователя"
 
-#: users/templates/auth/user_confirm_delete.html:8
+#: users/templates/users/user_confirm_delete.html:8
 msgid "Are you sure you want to delete user"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
-#: users/templates/auth/user_form.html:14
+#: users/templates/users/user_form.html:14
 msgid "Signup"
 msgstr "Зарегистрировать"
 
-#: users/templates/auth/user_list.html:12
+#: users/templates/users/user_list.html:12
 msgid "Full name"
 msgstr "Полное имя"
 
-#: users/templates/auth/user_update.html:8
+#: users/templates/users/user_update.html:8
 msgid "Edit user"
 msgstr "Изменение пользователя"
 
-#: users/views.py:21
+#: users/views.py:22
 msgid "User created"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:29
+#: users/views.py:32
 msgid "User updated"
 msgstr "Пользователь успешно изменен"
 
-#: users/views.py:35
+#: users/views.py:37
+msgid "First you need to log in!"
+msgstr ""
+
+#: users/views.py:39
 msgid "You can't edit another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:42
+#: users/views.py:47
 msgid "User deleted"
 msgstr "Пользователь успешно удален"
 
-#: users/views.py:47
+#: users/views.py:50
 msgid "You can't update another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:55
+#: users/views.py:57
 msgid "You can't delete user because it's in use"
-msgstr "Вы не можете удалить пользователя, потому что он используется"
+msgstr "Невозможно удалить пользователя"
+
+#~ msgid "Confirm password"
+#~ msgstr "Подтверждение пароля"
+
+#~ msgid "Password should be at least 3 symbols"
+#~ msgstr "Пароль должен быть минимум 3 символа"
+
+#~ msgid "Passwords doesn't match"
+#~ msgstr "Пароли не совпадают"
