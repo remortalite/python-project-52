@@ -140,7 +140,7 @@ msgstr "Изменение статуса"
 
 #: statuses/views.py:21
 msgid "Status created"
-msgstr "Статус создан"
+msgstr "Статус успешно создан"
 
 #: statuses/views.py:29
 msgid "Status updated"
