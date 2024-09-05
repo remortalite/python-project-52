@@ -49,6 +49,15 @@ class StatusViewTest(TestCase):
         self.assertFalse(Status.objects.filter(name="test_status").exists())
 
     def test_delete(self):
+        # if task exists
+        response = self.client.post(reverse("statuses_delete",
+                                    kwargs={"pk": self.status.id}))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Status.objects.filter(name="test_status").exists())
+
+        # remove task
+        self.status.task_set.all().delete()
+
         self.client.post(reverse("statuses_delete",
                                  kwargs={"pk": self.status.id}))
         self.assertFalse(Status.objects.filter(name="test_status").exists())
