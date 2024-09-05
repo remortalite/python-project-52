@@ -151,8 +151,6 @@ msgid "Status deleted"
 msgstr "Статус успешно удален"
 
 #: statuses/views.py:40
-#, fuzzy
-#| msgid "You can't delete user because it's in use"
 msgid "You can't delete status while it's in use"
 msgstr "Невозможно удалить статус"
 
