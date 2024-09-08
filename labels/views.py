@@ -40,6 +40,6 @@ class LabelDeleteView(LoginRequiredWithMessageMixin,
     def post(self, request, pk, *args, **kwargs):
         label = get_object_or_404(Label, pk=pk)
         if label.task_set.exists():
-            messages.error(request, _("Deletion error"))
+            messages.error(request, _("Unable to delete label"))
             return redirect(reverse("labels"))
         return super().post(request, *args, **kwargs)

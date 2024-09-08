@@ -40,7 +40,7 @@ class StatusDeleteView(LoginRequiredWithMessageMixin,
     def post(self, request, pk, *args, **kwargs):
         status = get_object_or_404(Status, id=pk)
         if status.task_set.exists():
-            messages.error(request, _("Deletion error"))
+            messages.error(request, _("Unable to delete status"))
             return redirect(reverse_lazy("statuses"))
         data = super().post(request, pk, *args, **kwargs)
         return data

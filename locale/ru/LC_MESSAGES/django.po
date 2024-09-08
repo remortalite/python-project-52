@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 14:50+0000\n"
+"POT-Creation-Date: 2024-09-08 14:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,20 +94,20 @@ msgstr "Удалить"
 msgid "Edit label"
 msgstr "Изменение метки"
 
-#: labels/views.py:21
+#: labels/views.py:22
 msgid "Label created"
 msgstr "Метка успешно создана"
 
-#: labels/views.py:29
+#: labels/views.py:31
 msgid "Label updated"
 msgstr "Метка успешно изменена"
 
-#: labels/views.py:35
+#: labels/views.py:38
 msgid "Label deleted"
 msgstr "Метка успешно удалена"
 
-#: labels/views.py:40
-msgid "Can't delete label because it's in use"
+#: labels/views.py:43
+msgid "Unable to delete label"
 msgstr "Невозможно удалить метку"
 
 #: statuses/models.py:14 tasks/models.py:16
@@ -138,27 +138,27 @@ msgstr "Создать статус"
 msgid "Edit status"
 msgstr "Изменение статуса"
 
-#: statuses/views.py:21
+#: statuses/views.py:22
 msgid "Status created"
 msgstr "Статус успешно создан"
 
-#: statuses/views.py:29
+#: statuses/views.py:31
 msgid "Status updated"
 msgstr "Статус успешно изменен"
 
-#: statuses/views.py:35
+#: statuses/views.py:38
 msgid "Status deleted"
 msgstr "Статус успешно удален"
 
-#: statuses/views.py:40
-msgid "You can't delete status while it's in use"
+#: statuses/views.py:43
+msgid "Unable to delete status"
 msgstr "Невозможно удалить статус"
 
-#: task_manager/settings.py:159
+#: task_manager/settings.py:162
 msgid "Russian"
 msgstr "Русский"
 
-#: task_manager/settings.py:160
+#: task_manager/settings.py:163
 msgid "English"
 msgstr ""
 
@@ -271,19 +271,19 @@ msgstr "Показать"
 msgid "Edit task"
 msgstr "Изменение задачи"
 
-#: tasks/views.py:35
+#: tasks/views.py:36
 msgid "Task created"
 msgstr "Задача успешно создана"
 
-#: tasks/views.py:53
+#: tasks/views.py:55
 msgid "Task updated"
 msgstr "Задача успешно изменена"
 
-#: tasks/views.py:59
+#: tasks/views.py:62
 msgid "Task deleted"
 msgstr "Задача успешно удалена"
 
-#: tasks/views.py:65 tasks/views.py:72
+#: tasks/views.py:68 tasks/views.py:75
 msgid "Task can be deleted only by author"
 msgstr "Задачу может удалить только ее автор"
 
@@ -302,6 +302,10 @@ msgstr "Выход"
 #: templates/layout/base.html:50 users/templates/users/user_form.html:8
 msgid "Sign up"
 msgstr "Регистрация"
+
+#: users/mixins.py:23
+msgid "First you need to log in"
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: users/templates/users/user_confirm_delete.html:7
 msgid "Delete user"
@@ -327,29 +331,43 @@ msgstr "Изменение пользователя"
 msgid "User created"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:32
+#: users/views.py:35
 msgid "User updated"
 msgstr "Пользователь успешно изменен"
 
-#: users/views.py:37
+#: users/views.py:36 users/views.py:50
 msgid "First you need to log in!"
-msgstr ""
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: users/views.py:39
+#: users/views.py:37
 msgid "You can't edit another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:47
+#: users/views.py:48
 msgid "User deleted"
 msgstr "Пользователь успешно удален"
 
-#: users/views.py:50
+#: users/views.py:49
 msgid "You can't update another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:57
-msgid "You can't delete user because it's in use"
+#: users/views.py:56
+msgid "Unable to delete user"
 msgstr "Невозможно удалить пользователя"
+
+#, fuzzy
+#~| msgid "Delete user"
+#~ msgid "Deletion error"
+#~ msgstr "Удалить пользователя"
+
+#~ msgid "Can't delete label because it's in use"
+#~ msgstr "Невозможно удалить метку"
+
+#~ msgid "You can't delete status while it's in use"
+#~ msgstr "Невозможно удалить статус"
+
+#~ msgid "You can't delete user because it's in use"
+#~ msgstr "Невозможно удалить пользователя"
 
 #~ msgid "Confirm password"
 #~ msgstr "Подтверждение пароля"
