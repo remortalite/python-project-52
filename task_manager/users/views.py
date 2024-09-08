@@ -26,7 +26,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
     extra_context = {
         "page_header": _("Create user"),
-        "button_text": _("Create"),
+        "button_text": _("Sign me up"),
     }
 
 
