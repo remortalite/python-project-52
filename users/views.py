@@ -42,10 +42,10 @@ class UserDeleteView(LoginRequiredWithMessageMixin,
                      SuccessMessageMixin,
                      DeleteView):
     model = User
-    success_message = _("User deleted")
     success_url = reverse_lazy("users")
     fail_url = reverse_lazy("users")
 
+    success_message = _("User deleted")
     fail_message = _("You can't update another user")
     no_auth_message = _("First you need to log in!")
 
