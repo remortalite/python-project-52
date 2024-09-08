@@ -17,6 +17,7 @@ class UserOnlyEditThemselfPermissionMixin(AccessMixin):
             return super().dispatch(request, pk, *args, **kwargs)
         return redirect(to=self.fail_url, request=request)
 
+
 class LoginRequiredWithMessageMixin(LoginRequiredMixin):
     no_auth_message = ""
 
