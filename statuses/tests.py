@@ -79,7 +79,7 @@ class StatusViewTest(TestCase):
         # if task exists
         response = self.client.post(path_to_object, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Deletion error", response.content)
+        self.assertIn(b"Unable to delete status", response.content)
         self.assertTrue(Status.objects.filter(name="test_status").exists())
 
         # remove tasks
