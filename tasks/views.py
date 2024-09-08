@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (ListView,
                                   CreateView,
                                   DetailView,
@@ -13,12 +12,13 @@ import logging
 
 from tasks.models import Task
 from tasks.filters import TasksFilter
+from users.mixins import LoginRequiredWithMessageMixin
 
 
 logger = logging.getLogger(__name__)
 
 
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(LoginRequiredWithMessageMixin, ListView):
     model = Task
 
     def get_context_data(self, **kwargs):
@@ -29,7 +29,8 @@ class TaskListView(LoginRequiredMixin, ListView):
         return context
 
 
-class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TaskCreateView(LoginRequiredWithMessageMixin,
+                     SuccessMessageMixin, CreateView):
     model = Task
     success_url = reverse_lazy("tasks")
     success_message = _("Task created")
@@ -42,11 +43,12 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return data
 
 
-class TaskDetailView(LoginRequiredMixin, DetailView):
+class TaskDetailView(LoginRequiredWithMessageMixin, DetailView):
     model = Task
 
 
-class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class TaskUpdateView(LoginRequiredWithMessageMixin,
+                     SuccessMessageMixin, UpdateView):
     model = Task
     fields = ["name", "description", "executor", "status", "labels"]
     success_url = reverse_lazy("tasks")
@@ -54,7 +56,8 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name_suffix = "_update"
 
 
-class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class TaskDeleteView(LoginRequiredWithMessageMixin,
+                     SuccessMessageMixin, DeleteView):
     model = Task
     success_message = _("Task deleted")
     success_url = reverse_lazy("tasks")
