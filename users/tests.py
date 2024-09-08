@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 import logging
 
@@ -7,22 +7,19 @@ from users.models import User
 logger = logging.getLogger(__name__)
 
 
-class UsersViewTest(TestCase):
+class UsersTest(TestCase):
     fixtures = ["sample.json"]
 
-    def test_status_and_column_name(self):
+    def setUp(self):
+        self.client = Client(headers={"Accept-Language": "en"})
+        self.user = User.objects.get(username="test_user")
+
+    def test_UserListView(self):
         response = self.client.get(reverse('users'))
         self.assertEqual(200, response.status_code)
         self.assertIn(b"test_user", response.content)
 
-
-class TestUserFormView(TestCase):
-    fixtures = ["sample.json"]
-
-    def setUp(self):
-        self.user = User.objects.get(username="test_user")
-
-    def test_post(self):
+    def test_UserCreateView(self):
         self.client.post(reverse("users_create"),
                          data={"username": "test_user_post",
                                "password1": "test_user_post",
@@ -31,12 +28,13 @@ class TestUserFormView(TestCase):
         user = User.objects.get(username="test_user_post")
         self.assertEqual("test_user_post", user.username)
 
-    def test_update_unauthorized(self):
+    def test_UserUpdateView(self):
+        # unauthorized
         response = self.client.get(reverse("users_update",
                                            kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 302)
 
-    def test_update_authorized(self):
+        # authorized
         self.client.login(username="test_user",
                           password="test_password")
         response = self.client.get(reverse("users_update",
@@ -51,7 +49,7 @@ class TestUserFormView(TestCase):
                                            kwargs={"pk": self.user.id}))
         self.assertEqual(response.status_code, 302)
 
-    def test_delete(self):
+    def test_UserDeleteView(self):
         self.client.login(username="test_user",
                           password="test_password")
         response = self.client.post(reverse("users_delete",
