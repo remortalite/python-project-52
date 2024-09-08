@@ -10,9 +10,9 @@ from django.views.generic import (ListView,
                                   DeleteView)
 import logging
 
-from tasks.models import Task
-from tasks.filters import TasksFilter
-from users.mixins import LoginRequiredWithMessageMixin
+from task_manager.tasks.models import Task
+from task_manager.tasks.filters import TasksFilter
+from task_manager.users.mixins import LoginRequiredWithMessageMixin
 
 
 logger = logging.getLogger(__name__)

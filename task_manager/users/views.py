@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models.deletion import ProtectedError
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from users.models import User
-from users.forms import UserForm, UserUpdateForm
-from users.mixins import (UserOnlyEditThemselfPermissionMixin,
-                          LoginRequiredWithMessageMixin)
+from task_manager.users.models import User
+from task_manager.users.forms import UserForm, UserUpdateForm
+from task_manager.users.mixins import (UserOnlyEditThemselfPermissionMixin,
+                                       LoginRequiredWithMessageMixin)
 
 
 class UserListView(ListView):

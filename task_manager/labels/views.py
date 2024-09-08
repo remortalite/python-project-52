@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages.views import SuccessMessageMixin
 
-from labels.models import Label
-from users.mixins import LoginRequiredWithMessageMixin
+from task_manager.labels.models import Label
+from task_manager.users.mixins import LoginRequiredWithMessageMixin
 
 
 class LabelListView(LoginRequiredWithMessageMixin, ListView):

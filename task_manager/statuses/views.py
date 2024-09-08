@@ -6,8 +6,8 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 
-from statuses.models import Status
-from users.mixins import LoginRequiredWithMessageMixin
+from task_manager.statuses.models import Status
+from task_manager.users.mixins import LoginRequiredWithMessageMixin
 
 
 class StatusListView(LoginRequiredWithMessageMixin, ListView):

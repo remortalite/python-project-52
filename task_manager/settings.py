@@ -62,10 +62,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'task_manager',
-    'users',
-    'statuses',
-    'tasks',
-    'labels',
+    'task_manager.users',
+    'task_manager.statuses',
+    'task_manager.tasks',
+    'task_manager.labels',
 ]
 
 AUTH_USER_MODEL = "users.User"
