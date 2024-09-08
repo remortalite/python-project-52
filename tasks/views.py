@@ -36,6 +36,13 @@ class TaskCreateView(LoginRequiredWithMessageMixin,
     success_message = _("Task created")
     fields = ["name", "description", "executor", "status", "labels"]
 
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Create task"),
+        "button_text": _("Create"),
+    }
+
     def post(self, request, *args, **kwargs):
         data = super().post(request, *args, **kwargs)
         self.object.author = request.user
@@ -53,7 +60,13 @@ class TaskUpdateView(LoginRequiredWithMessageMixin,
     fields = ["name", "description", "executor", "status", "labels"]
     success_url = reverse_lazy("tasks")
     success_message = _("Task updated")
-    template_name_suffix = "_update"
+
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Edit task"),
+        "button_text": _("Edit"),
+    }
 
 
 class TaskDeleteView(LoginRequiredWithMessageMixin,

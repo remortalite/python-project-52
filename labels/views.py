@@ -21,14 +21,27 @@ class LabelCreateView(LoginRequiredWithMessageMixin,
     success_url = reverse_lazy("labels")
     success_message = _("Label created")
 
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Create label"),
+        "button_text": _("Create"),
+    }
+
 
 class LabelUpdateView(LoginRequiredWithMessageMixin,
                       SuccessMessageMixin, UpdateView):
     model = Label
     fields = ["name"]
-    template_name_suffix = "_update_form"
     success_url = reverse_lazy("labels")
     success_message = _("Label updated")
+
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Edit label"),
+        "button_text": _("Edit"),
+    }
 
 
 class LabelDeleteView(LoginRequiredWithMessageMixin,

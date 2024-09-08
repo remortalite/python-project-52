@@ -21,14 +21,27 @@ class StatusCreateView(LoginRequiredWithMessageMixin,
     success_url = reverse_lazy("statuses")
     success_message = _("Status created")
 
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Create status"),
+        "button_text": _("Create"),
+    }
+
 
 class StatusUpdateView(LoginRequiredWithMessageMixin,
                        SuccessMessageMixin, UpdateView):
     model = Status
     fields = ["name"]
-    template_name_suffix = "_update_form"
     success_url = reverse_lazy("statuses")
     success_message = _("Status updated")
+
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Edit status"),
+        "button_text": _("Edit"),
+    }
 
 
 class StatusDeleteView(LoginRequiredWithMessageMixin,

@@ -22,6 +22,13 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = _("User created")
     success_url = reverse_lazy("login")
 
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Create user"),
+        "button_text": _("Create"),
+    }
+
 
 class UserUpdateView(LoginRequiredWithMessageMixin,
                      UserOnlyEditThemselfPermissionMixin,
@@ -30,11 +37,17 @@ class UserUpdateView(LoginRequiredWithMessageMixin,
     model = User
     form_class = UserUpdateForm
     success_url = fail_url = reverse_lazy("users")
-    template_name_suffix = "_update"
 
     success_message = _("User updated")
     no_auth_message = _("First you need to log in!")
     fail_message = _("You can't edit another user")
+
+    template_name = "form.html"
+
+    extra_context = {
+        "page_header": _("Edit user"),
+        "button_text": _("Edit"),
+    }
 
 
 class UserDeleteView(LoginRequiredWithMessageMixin,
