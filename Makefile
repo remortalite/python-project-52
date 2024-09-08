@@ -18,3 +18,6 @@ lint: install-dev
 
 test: install-dev
 	poetry run python manage.py test
+
+shell:
+	poetry run python manage.py shell_plus

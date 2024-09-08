@@ -17,16 +17,19 @@ class UsersTest(TestCase):
     def test_UserListView(self):
         response = self.client.get(reverse('users'))
         self.assertEqual(200, response.status_code)
+        self.assertIn(b"Users", response.content)
         self.assertIn(b"test_user", response.content)
 
     def test_UserCreateView(self):
-        self.client.post(reverse("users_create"),
-                         data={"username": "test_user_post",
-                               "password1": "test_user_post",
-                               "password2": "test_user_post"}
-                         )
+        response = self.client.post(reverse("users_create"),
+                                    follow=True,
+                                    data={"username": "test_user_post",
+                                          "password1": "test_user_post",
+                                          "password2": "test_user_post"})
         user = User.objects.get(username="test_user_post")
         self.assertEqual("test_user_post", user.username)
+        self.assertIn(b"User created", response.content)
+        self.assertEqual(reverse("login"), response.request['PATH_INFO'])
 
     def test_UserUpdateView(self):
         # unauthorized
