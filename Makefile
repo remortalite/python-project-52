@@ -1,11 +1,14 @@
-install:
-	poetry install --without dev
-
-
-# development
+all: install
 
 build:
-	./build.sh
+	@echo Building application...
+	@./build.sh
+
+install:
+	@echo Installation...
+	poetry install --without dev
+
+# development
 
 dev: install-dev
 	poetry run python manage.py runserver
@@ -21,3 +24,5 @@ test: install-dev
 
 shell:
 	poetry run python manage.py shell_plus
+
+.PHONY: build install dev lint test shell
