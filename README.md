@@ -3,9 +3,9 @@
 [![Actions Status](https://github.com/remortalite/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/remortalite/python-project-52/actions)
 [![build](https://github.com/remortalite/python-project-52/actions/workflows/build.yml/badge.svg)](https://github.com/remortalite/python-project-52/actions/workflows/build.yml)
 
-Учебный проект. Основной функционал -- приложение позволяет управлять задачами пользователям с возможностью регистрации.
+Учебный проект. Основной функционал -- позволить пользователям зарегистрироваться и управлять задачами.
 Приложение даёт возможность зарегистрированным пользователям создавать, изменять и удалять задачи,
-а также связанные с ними элементы. Приложение поддерживает ведение статусов задач и создание меток.
+а также связанные с ними элементы. Также проект поддерживает ведение статусов задач и создание меток.
 
 ## Установка и запуск
 
