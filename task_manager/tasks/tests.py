@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -34,12 +35,12 @@ class TasksTest(TestCase):
         for url in urls:
             response = self.client.get(url, follow=True)
             self.assertIn(b"First you need to log in", response.content)
-            self.assertEqual(reverse("login"), response.request['PATH_INFO'])
+            self.assertRedirects(response, reverse("login") + "?next=" + url)
 
     def test_TasksView(self):
         response = self.client.get(reverse("tasks"))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Tasks", response.content)
         self.assertIn(self.task.name.encode(), response.content)
 
@@ -47,7 +48,7 @@ class TasksTest(TestCase):
         response = self.client.get(reverse("tasks_show",
                                            kwargs={"pk": self.task.id}))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Task Detail", response.content)
         self.assertIn(self.task.name.encode(), response.content)
         self.assertIn(self.user.username.encode(), response.content)
@@ -61,14 +62,13 @@ class TasksTest(TestCase):
                                     follow=True,
                                     data={"name": "test_task_create",
                                           "status": self.status.id})
-        self.assertEqual(response.status_code, 200)
         self.assertIn(b"Task created", response.content)
-        self.assertEqual(reverse("tasks"), response.request['PATH_INFO'])
+        self.assertRedirects(response, reverse("tasks"))
         self.assertTrue(Task.objects.filter(name="test_task_create").exists())
 
         # GET
         response = self.client.get(reverse("tasks_create"))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Create task", response.content)
         self.assertIn(b"Description", response.content)
         self.assertIn(b"Labels", response.content)
@@ -79,7 +79,7 @@ class TasksTest(TestCase):
         # GET
         response = self.client.get(url_for_update)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Edit task", response.content)
         self.assertIn(self.task.name.encode(), response.content)
 
@@ -91,9 +91,8 @@ class TasksTest(TestCase):
                                         "status": self.status.id,
                                     })
 
-        self.assertEqual(response.status_code, 200)
         self.assertIn(b"Task updated", response.content)
-        self.assertEqual(reverse("tasks"), response.request['PATH_INFO'])
+        self.assertRedirects(response, reverse("tasks"))
         self.assertFalse(Task.objects.filter(
             name=self.task.name.encode()).exists())
         self.assertTrue(Task.objects.filter(
@@ -104,6 +103,6 @@ class TasksTest(TestCase):
                                  kwargs={"pk": self.task.id})
 
         response = self.client.post(url_for_delete, follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse("tasks"))
         self.assertIn(b"Task deleted", response.content)
         self.assertFalse(Task.objects.filter(name=self.task.name).exists())

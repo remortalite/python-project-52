@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -16,7 +17,7 @@ class UsersTest(TestCase):
 
     def test_UserListView(self):
         response = self.client.get(reverse('users'))
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Users", response.content)
         self.assertIn(self.user.username.encode(), response.content)
 
@@ -33,15 +34,16 @@ class UsersTest(TestCase):
         url_for_update = reverse("users_update", kwargs={"pk": self.user.id})
         # unauthorized
         response = self.client.get(url_for_update, follow=True)
-        self.assertEqual(response.status_code, 200)
         self.assertIn(b"First you need to log in", response.content)
+        self.assertRedirects(response,
+                             reverse("login") + "?next=" + url_for_update)
         self.assertEqual(reverse("login"), response.request['PATH_INFO'])
 
         # authorized
         self.client.login(**self.data["user"])
         response = self.client.get(url_for_update)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"Edit user", response.content)
         self.assertIn(b"Username", response.content)
         self.assertIn(self.data["user"]["username"].encode(), response.content)
@@ -53,7 +55,7 @@ class UsersTest(TestCase):
             data=self.data["new_user"]
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpResponse.status_code)
         self.assertIn(b"User updated", response.content)
         self.assertEqual(
             User.objects.get(
@@ -64,14 +66,14 @@ class UsersTest(TestCase):
         url_object = reverse("users_delete", kwargs={"pk": self.user.id})
         # unauthorized
         response = self.client.get(url_object, follow=True)
-        self.assertEqual(response.status_code, 200)
         self.assertIn(b"First you need to log in", response.content)
+        self.assertRedirects(response, reverse("login") + "?next=" + url_object)
         self.assertEqual(reverse("login"), response.request['PATH_INFO'])
 
         # authorized, try to delete bounded
         self.client.login(**self.data["user"])
         response = self.client.post(url_object, follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse("users"))
         self.assertIn(b"Unable to delete user", response.content)
         self.client.logout()
 
@@ -82,7 +84,7 @@ class UsersTest(TestCase):
         response = self.client.post(reverse("users_delete",
                                             kwargs={"pk": user.id}),
                                     follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse("users"))
         self.assertFalse(User.objects
                          .filter(username=self.data["new_user"]["username"])
                          .exists())

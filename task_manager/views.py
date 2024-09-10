@@ -10,6 +10,7 @@ class LoginUserView(SuccessMessageMixin, LoginView):
     template_name = "form.html"
     form_class = AuthenticationForm
     next_page = "/"
+    redirect_authenticated_user = True
     extra_context = {
         'page_header': _('Login'),
         'button_text': _('Enter'),
