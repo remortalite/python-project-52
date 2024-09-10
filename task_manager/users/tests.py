@@ -8,10 +8,9 @@ from task_manager.users.models import User
 
 class UsersTest(TestCase):
     fixtures = ["sample.json"]
+    data = load("task_manager/fixtures/user_data.json")
 
     def setUp(self):
-        self.data = load("task_manager/fixtures/user_data.json")
-
         self.client = Client(headers={"Accept-Language": "en"})
         self.user = User.objects.get(username=self.data["user"]["username"])
 
