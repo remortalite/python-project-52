@@ -57,10 +57,16 @@ class UserDeleteView(LoginRequiredWithMessageMixin,
     model = User
     success_url = reverse_lazy("users")
     fail_url = reverse_lazy("users")
+    template_name = "confirm_deletion.html"
 
     success_message = _("User deleted")
     fail_message = _("You are not allowed to delete another user")
     no_auth_message = _("First you need to log in!")
+
+    extra_context = {
+        "page_header": _("Delete user"),
+        "deletion_msg": _("Are you sure you want to delete user")
+    }
 
     def post(self, request, pk, *args, **kwargs):
         try:

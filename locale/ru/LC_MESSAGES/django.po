@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 08:10+0000\n"
+"POT-Creation-Date: 2024-09-10 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,6 +87,16 @@ msgid "Label deleted"
 msgstr "Метка успешно удалена"
 
 #: task_manager/labels/views.py:56
+#: task_manager/templates/labels/label_confirm_delete.html:7
+msgid "Delete label"
+msgstr "Удалить метку"
+
+#: task_manager/labels/views.py:57
+#: task_manager/templates/labels/label_confirm_delete.html:8
+msgid "Are you sure you want to delete label"
+msgstr "Вы уверены, что хотите удалить метку"
+
+#: task_manager/labels/views.py:63
 msgid "Unable to delete label"
 msgstr "Невозможно удалить метку"
 
@@ -132,6 +142,16 @@ msgid "Status deleted"
 msgstr "Статус успешно удален"
 
 #: task_manager/statuses/views.py:56
+#: task_manager/templates/statuses/status_confirm_delete.html:7
+msgid "Delete status"
+msgstr "Удалить статус"
+
+#: task_manager/statuses/views.py:57
+#: task_manager/templates/statuses/status_confirm_delete.html:8
+msgid "Are you sure you want to delete status"
+msgstr "Вы уверены, что хотите удалить статус"
+
+#: task_manager/statuses/views.py:63
 msgid "Unable to delete status"
 msgstr "Невозможно удалить статус"
 
@@ -189,9 +209,27 @@ msgstr "Изменение задачи"
 msgid "Task deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/tasks/views.py:81 task_manager/tasks/views.py:88
+#: task_manager/tasks/views.py:81
+#: task_manager/templates/tasks/task_confirm_delete.html:7
+msgid "Delete task"
+msgstr "Удалить задачу"
+
+#: task_manager/tasks/views.py:82
+#: task_manager/templates/tasks/task_confirm_delete.html:8
+msgid "Are you sure you want to delete task"
+msgstr "Вы уверены, что хотите удалить задачу"
+
+#: task_manager/tasks/views.py:89 task_manager/tasks/views.py:96
 msgid "Task can be deleted only by author"
 msgstr "Задачу может удалить только ее автор"
+
+#: task_manager/templates/confirm_deletion.html:12
+#: task_manager/templates/labels/label_confirm_delete.html:12
+#: task_manager/templates/statuses/status_confirm_delete.html:12
+#: task_manager/templates/tasks/task_confirm_delete.html:12
+#: task_manager/templates/users/user_confirm_delete.html:12
+msgid "Yes, delete"
+msgstr "Да, удалить"
 
 #: task_manager/templates/index.html:7
 msgid "Hello from Hexlet!"
@@ -204,21 +242,6 @@ msgstr "Практические курсы по программировани�
 #: task_manager/templates/index.html:13
 msgid "Learn more"
 msgstr "Узнать больше"
-
-#: task_manager/templates/labels/label_confirm_delete.html:7
-msgid "Delete label"
-msgstr "Удалить метку"
-
-#: task_manager/templates/labels/label_confirm_delete.html:8
-msgid "Are you sure you want to delete label"
-msgstr "Вы уверены, что хотите удалить"
-
-#: task_manager/templates/labels/label_confirm_delete.html:12
-#: task_manager/templates/statuses/status_confirm_delete.html:12
-#: task_manager/templates/tasks/task_confirm_delete.html:12
-#: task_manager/templates/users/user_confirm_delete.html:12
-msgid "Yes, delete"
-msgstr "Да, удалить"
 
 #: task_manager/templates/labels/label_list.html:28
 #: task_manager/templates/statuses/status_list.html:27
@@ -249,22 +272,6 @@ msgstr "Вход"
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: task_manager/templates/statuses/status_confirm_delete.html:7
-msgid "Delete status"
-msgstr "Удалить статус"
-
-#: task_manager/templates/statuses/status_confirm_delete.html:8
-msgid "Are you sure you want to delete status"
-msgstr "Вы уверены, что хотите удалить"
-
-#: task_manager/templates/tasks/task_confirm_delete.html:7
-msgid "Delete task"
-msgstr "Удалить задачу"
-
-#: task_manager/templates/tasks/task_confirm_delete.html:8
-msgid "Are you sure you want to delete task"
-msgstr "Вы уверены, что хотите удалить задачу"
-
 #: task_manager/templates/tasks/task_detail.html:7
 msgid "Task Detail"
 msgstr "Просмотр задачи"
@@ -274,10 +281,12 @@ msgid "Show"
 msgstr "Показать"
 
 #: task_manager/templates/users/user_confirm_delete.html:7
+#: task_manager/users/views.py:67
 msgid "Delete user"
 msgstr "Удалить пользователя"
 
 #: task_manager/templates/users/user_confirm_delete.html:8
+#: task_manager/users/views.py:68
 msgid "Are you sure you want to delete user"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
@@ -309,7 +318,7 @@ msgstr "Зарегистрировать"
 msgid "User updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/views.py:42 task_manager/users/views.py:63
+#: task_manager/users/views.py:42 task_manager/users/views.py:64
 msgid "First you need to log in!"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
@@ -321,15 +330,15 @@ msgstr "У вас нет прав для изменения другого по�
 msgid "Edit user"
 msgstr "Изменение пользователя"
 
-#: task_manager/users/views.py:61
+#: task_manager/users/views.py:62
 msgid "User deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:62
+#: task_manager/users/views.py:63
 msgid "You are not allowed to delete another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:69
+#: task_manager/users/views.py:75
 msgid "Unable to delete user"
 msgstr "Невозможно удалить пользователя"
 
