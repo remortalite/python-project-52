@@ -40,7 +40,7 @@ class UserUpdateView(LoginRequiredWithMessageMixin,
 
     success_message = _("User updated")
     no_auth_message = _("First you need to log in!")
-    fail_message = _("You can't edit another user")
+    fail_message = _("You are not allowed to edit another user")
 
     template_name = "form.html"
 
@@ -59,7 +59,7 @@ class UserDeleteView(LoginRequiredWithMessageMixin,
     fail_url = reverse_lazy("users")
 
     success_message = _("User deleted")
-    fail_message = _("You can't update another user")
+    fail_message = _("You are not allowed to delete another user")
     no_auth_message = _("First you need to log in!")
 
     def post(self, request, pk, *args, **kwargs):
