@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-09 14:28+0000\n"
+"POT-Creation-Date: 2024-09-10 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,7 +314,7 @@ msgid "First you need to log in!"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: task_manager/users/views.py:43
-msgid "You can't edit another user"
+msgid "You are not allowed to edit another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/users/views.py:48
@@ -326,7 +326,7 @@ msgid "User deleted"
 msgstr "Пользователь успешно удален"
 
 #: task_manager/users/views.py:62
-msgid "You can't update another user"
+msgid "You are not allowed to delete another user"
 msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/users/views.py:69
@@ -337,17 +337,20 @@ msgstr "Невозможно удалить пользователя"
 msgid "You logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/views.py:14
+#: task_manager/views.py:15
 msgid "Login"
 msgstr "Войти"
 
-#: task_manager/views.py:15
+#: task_manager/views.py:16
 msgid "Enter"
 msgstr "Войти"
 
-#: task_manager/views.py:23
+#: task_manager/views.py:24
 msgid "You logged out"
 msgstr "Вы разлогинены"
+
+#~ msgid "You can't update another user"
+#~ msgstr "У вас нет прав для изменения другого пользователя."
 
 #~ msgid "Hello"
 #~ msgstr "Привет"
