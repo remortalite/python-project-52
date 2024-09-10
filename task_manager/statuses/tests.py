@@ -3,6 +3,7 @@ from django.urls import reverse
 import logging
 
 from task_manager.statuses.models import Status
+from task_manager.fixtures.load_fixture import load
 
 logger = logging.getLogger(__name__)
 
@@ -11,10 +12,10 @@ class StatusViewTest(TestCase):
     fixtures = ["sample.json"]
 
     def setUp(self):
+        self.data = load("task_manager/fixtures/user_data.json")
         self.client = Client(headers={"Accept-Language": "en"})
-        self.client.login(username="test_user",
-                          password="test_password")
-        self.status = Status.objects.get(name="test_status")
+        self.client.login(**self.data["user"])
+        self.status = Status.objects.get(**self.data["status"])
 
     def test_unauthorized(self):
         self.client.logout()

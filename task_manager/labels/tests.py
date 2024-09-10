@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import reverse
 
+from task_manager.fixtures.load_fixture import load
 from task_manager.users.models import User
 from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
@@ -10,12 +11,13 @@ class LabelTest(TestCase):
     fixtures = ["sample.json"]
 
     def setUp(self):
+        self.data = load("task_manager/fixtures/user_data.json")
+
         self.client = Client(headers={"Accept-Language": "en"})
-        self.client.login(username="test_user",
-                          password="test_password")
-        self.user = User.objects.get(username="test_user")
-        self.label = Label.objects.get(name="test_label")
-        self.task = Task.objects.get(name="test_task")
+        self.client.login(**self.data["user"])
+        self.user = User.objects.get(username=self.data["user"]["username"])
+        self.label = Label.objects.get(**self.data["label"])
+        self.task = Task.objects.get(**self.data["task"])
 
     def test_unauthorized(self):
         self.client.logout()
@@ -37,7 +39,7 @@ class LabelTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Labels", response.content)
-        self.assertIn(b"test_label", response.content)
+        self.assertIn(self.label.name.encode(), response.content)
 
     def test_LabelCreateView(self):
         # POST
@@ -72,7 +74,7 @@ class LabelTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Label updated", response.content)
         self.assertEqual(reverse("labels"), response.request['PATH_INFO'])
-        self.assertFalse(Label.objects.filter(name="test_label").exists())
+        self.assertFalse(Label.objects.filter(name=self.label.name).exists())
         self.assertTrue(Label.objects.filter(name="test_updated").exists())
 
     def test_LabelDeleteView(self):
@@ -82,7 +84,7 @@ class LabelTest(TestCase):
         response = self.client.post(path_to_label, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Unable to delete label", response.content)
-        self.assertTrue(Label.objects.filter(name="test_label").exists())
+        self.assertTrue(Label.objects.filter(name=self.label.name).exists())
 
         # when task removed
         self.label.task_set.all().delete()
@@ -90,4 +92,4 @@ class LabelTest(TestCase):
         response = self.client.post(path_to_label, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Label deleted", response.content)
-        self.assertFalse(Label.objects.filter(name="test_label").exists())
+        self.assertFalse(Label.objects.filter(name=self.label.name).exists())
